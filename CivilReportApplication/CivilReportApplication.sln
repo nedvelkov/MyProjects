@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CivilReportApplication", "CivilReportApplication\CivilReportApplication.csproj", "{6703EA3B-40FB-4059-B021-ADC586A72B0E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6703EA3B-40FB-4059-B021-ADC586A72B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6703EA3B-40FB-4059-B021-ADC586A72B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6703EA3B-40FB-4059-B021-ADC586A72B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6703EA3B-40FB-4059-B021-ADC586A72B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C042E9BB-ADD8-4114-AA83-2E76CDB90372}
+	EndGlobalSection
+EndGlobal
