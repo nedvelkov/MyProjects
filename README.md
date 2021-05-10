@@ -8,6 +8,6 @@ This repository contains all my simple programs I have created to easier my work
     Program is in initial stage, as console application. It will be rewriten with Windows form and created with user-firendly interface.
  * # CivilReportApplication
     This is application that contains multiple mini application, for basic operation as create: 
-    *   Layout file (for vertical profiles or elevation targets) / in progress for elevation target/
-    *   Reports for print ( as Alignment report, Vertical profile report and so on) / in progress/
+    *   Layout file (for vertical profiles or elevation targets) / completed. Application create .txt files for Civil 3D/
+    *   Reports for print ( as Alignment report, Vertical profile report and so on) / alignment report app completed./
     *   Report for material list ( as Pavement list and Eartworks list) / pavement list is create as console application, working over earhworks list/ 
