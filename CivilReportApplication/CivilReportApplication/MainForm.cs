@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CivilReportApplication
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace CivilReportApplication
         {
             this.Hide();
             
-            Form2 form2 = new Form2();
+            LayoutXml form2 = new LayoutXml();
             form2.ShowDialog();
         }
 
@@ -45,8 +45,8 @@ namespace CivilReportApplication
         private void btn2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            formHtml layoutHTML = new formHtml();
-            layoutHTML.ShowDialog();
+            SelectHtmlForm form = new SelectHtmlForm();
+            form.ShowDialog();
         }
     }
 }

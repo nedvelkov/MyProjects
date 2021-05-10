@@ -11,22 +11,22 @@ namespace CivilReportApplication.Models
 {
     public class HtmlReader
     {
-        private string folderPath;
+        private string filePath;
         private int stationIndex;
         private int designElevation;
 
         private HtmlDocument document;
         private HtmlDocument innerHtml;
-        public HtmlReader(string folderPath)
+        public HtmlReader(string filePath)
         {
-            this.folderPath = folderPath;
+            this.filePath = filePath;
         }
 
         public int ReadHtml()
         {
 
             this.document = new HtmlDocument();
-            this.document.Load(this.folderPath);
+            this.document.Load(this.filePath);
             var nodes = document.DocumentNode.SelectNodes("//tbody").ToList();
             var table = nodes.Skip(1).First();
             this.innerHtml = new HtmlDocument();
@@ -63,9 +63,44 @@ namespace CivilReportApplication.Models
             }
 
             var station = double.Parse(currentRow[stationIndex].Replace("+", ""));
-            var elevation = double.Parse(currentRow[designElevation].Replace("m", ""));
+
+            double.TryParse(currentRow[designElevation].Replace("m", ""), out double elevation);
 
             return $"{station} {elevation}";
+        }
+
+        public string ReadRow(int index,int elevationIndex,int stationIndex=0)
+        {
+            var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
+
+            var currentRow = data(allRows[index].InnerHtml);
+
+            var station = double.Parse(currentRow[stationIndex].Replace("+", ""));
+
+            double.TryParse(currentRow[elevationIndex].Replace("m", ""), out double elevation);
+
+            return $"{station} {elevation}";
+        }
+
+        public Dictionary<string,int> PointCodes()
+        {
+            ReadHtml();
+            var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
+            var temp=allRows[0].InnerHtml;
+            var currentRow = new HtmlDocument();
+
+            currentRow.LoadHtml(temp);
+
+            var allColms = currentRow.DocumentNode.SelectNodes("//td").Select(x=>x.InnerText).ToArray();
+            var result = new Dictionary<string, int>();
+            for (int i = 0; i < allColms.Length; i++)
+            {
+                if (allColms[i] == "&nbsp;") continue;
+                result.Add(allColms[i], i);
+            }
+
+            return result;
+
         }
 
         private string[] data(string html)
@@ -80,5 +115,7 @@ namespace CivilReportApplication.Models
 
             return result;
         }
+
+        
     }
 }

@@ -14,16 +14,15 @@ using CivilReportApplication.Models;
 
 namespace CivilReportApplication
 {
-    public partial class Form2 : Form
+    public partial class LayoutXml : Form
     {
-        private string xmlFile;
+        private string filePath;
         private string outputDirectory;
         private string outputName;
         private string layoutName;
         private StringBuilder sbCivil;
-        private Form1 form1;
 
-        public Form2()
+        public LayoutXml()
         {
             InitializeComponent();
 
@@ -32,7 +31,7 @@ namespace CivilReportApplication
         private void btn4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 form1 = new Form1();
+            MainForm form1 = new MainForm();
             form1.ShowDialog();
         }
 
@@ -42,7 +41,7 @@ namespace CivilReportApplication
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.xmlFile = openFileDialog.FileName;
+                this.filePath = openFileDialog.FileName;
                 this.textBox1.Text = StaticMethods.FileName(openFileDialog.FileName);
             }
             else
@@ -69,7 +68,7 @@ namespace CivilReportApplication
 
             try
             {
-                ReadXmlFile(xmlFile);
+                ReadXmlFile(filePath);
             }
             catch (Exception)
             {
@@ -86,8 +85,8 @@ namespace CivilReportApplication
 
             if (string.IsNullOrEmpty(outputDirectory))
             {
-                var temp = xmlFile.LastIndexOf("\\");
-                var directory = string.Concat(xmlFile.Take(temp));
+                var temp = filePath.LastIndexOf("\\");
+                var directory = string.Concat(filePath.Take(temp));
                 outputDirectory = directory;
             }
 

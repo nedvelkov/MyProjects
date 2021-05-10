@@ -42,9 +42,10 @@ namespace CivilReportApplication
             // 
             // rtnBtn
             // 
-            this.rtnBtn.Location = new System.Drawing.Point(193, 156);
+            this.rtnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtnBtn.Location = new System.Drawing.Point(172, 156);
             this.rtnBtn.Name = "rtnBtn";
-            this.rtnBtn.Size = new System.Drawing.Size(187, 30);
+            this.rtnBtn.Size = new System.Drawing.Size(140, 30);
             this.rtnBtn.TabIndex = 0;
             this.rtnBtn.Text = "Return";
             this.rtnBtn.UseVisualStyleBackColor = true;
@@ -52,9 +53,9 @@ namespace CivilReportApplication
             // 
             // loadHtml
             // 
-            this.loadHtml.Location = new System.Drawing.Point(26, 27);
+            this.loadHtml.Location = new System.Drawing.Point(12, 27);
             this.loadHtml.Name = "loadHtml";
-            this.loadHtml.Size = new System.Drawing.Size(150, 30);
+            this.loadHtml.Size = new System.Drawing.Size(140, 30);
             this.loadHtml.TabIndex = 1;
             this.loadHtml.Text = "Load HTML file";
             this.loadHtml.UseVisualStyleBackColor = true;
@@ -62,16 +63,18 @@ namespace CivilReportApplication
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(193, 33);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(172, 33);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(187, 20);
+            this.textBox1.Size = new System.Drawing.Size(140, 20);
             this.textBox1.TabIndex = 3;
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(26, 104);
+            this.saveBtn.Location = new System.Drawing.Point(12, 104);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(150, 30);
+            this.saveBtn.Size = new System.Drawing.Size(140, 30);
             this.saveBtn.TabIndex = 4;
             this.saveBtn.Text = "Save location";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -79,15 +82,19 @@ namespace CivilReportApplication
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(193, 110);
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Location = new System.Drawing.Point(172, 110);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(187, 20);
+            this.textBox2.Size = new System.Drawing.Size(140, 20);
             this.textBox2.TabIndex = 5;
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(124, 75);
+            this.label1.Location = new System.Drawing.Point(100, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 6;
@@ -95,23 +102,29 @@ namespace CivilReportApplication
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(193, 72);
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.Location = new System.Drawing.Point(172, 72);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(187, 20);
+            this.textBox3.Size = new System.Drawing.Size(140, 20);
             this.textBox3.TabIndex = 7;
             // 
             // prBar1
             // 
-            this.prBar1.Location = new System.Drawing.Point(26, 206);
+            this.prBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prBar1.Location = new System.Drawing.Point(12, 205);
             this.prBar1.Name = "prBar1";
-            this.prBar1.Size = new System.Drawing.Size(357, 24);
+            this.prBar1.Size = new System.Drawing.Size(300, 23);
             this.prBar1.TabIndex = 8;
             // 
             // crtBtn
             // 
-            this.crtBtn.Location = new System.Drawing.Point(26, 156);
+            this.crtBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.crtBtn.Location = new System.Drawing.Point(12, 156);
             this.crtBtn.Name = "crtBtn";
-            this.crtBtn.Size = new System.Drawing.Size(150, 30);
+            this.crtBtn.Size = new System.Drawing.Size(140, 30);
             this.crtBtn.TabIndex = 9;
             this.crtBtn.Text = "Create file";
             this.crtBtn.UseVisualStyleBackColor = true;
@@ -121,7 +134,7 @@ namespace CivilReportApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 259);
+            this.ClientSize = new System.Drawing.Size(334, 261);
             this.Controls.Add(this.crtBtn);
             this.Controls.Add(this.prBar1);
             this.Controls.Add(this.textBox3);
@@ -131,6 +144,8 @@ namespace CivilReportApplication
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.loadHtml);
             this.Controls.Add(this.rtnBtn);
+            this.MaximumSize = new System.Drawing.Size(700, 300);
+            this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "formHtml";
             this.Text = "LayoutHTML";
             this.Load += new System.EventHandler(this.formHtml_Load);

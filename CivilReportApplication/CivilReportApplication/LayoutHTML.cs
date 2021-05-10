@@ -25,7 +25,7 @@ namespace CivilReportApplication
         private void rtnBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 form1 = new Form1();
+            MainForm form1 = new MainForm();
             form1.ShowDialog();
         }
 
