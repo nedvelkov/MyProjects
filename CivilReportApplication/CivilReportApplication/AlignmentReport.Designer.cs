@@ -1,7 +1,7 @@
 ﻿
 namespace CivilReportApplication
 {
-    partial class Form3
+    partial class AlignmentReport
     {
         /// <summary>
         /// Required designer variable.

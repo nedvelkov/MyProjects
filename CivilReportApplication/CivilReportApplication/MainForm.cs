@@ -38,7 +38,7 @@ namespace CivilReportApplication
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form3 form3 = new Form3();
+            AlignmentReport form3 = new AlignmentReport();
             form3.ShowDialog();
         }
 

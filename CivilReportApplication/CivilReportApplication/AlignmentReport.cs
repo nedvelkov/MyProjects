@@ -12,13 +12,15 @@ using System.Windows.Forms;
 
 namespace CivilReportApplication
 {
-    public partial class Form3 : Form
+    public partial class AlignmentReport : Form
     {
         private string filePath;
         private string outputDirectory;
+        private string reportName;
+        private int countInfo;
         private List<AlignmentReportDto> exportDto;
 
-        public Form3()
+        public AlignmentReport()
         {
             InitializeComponent();
         }
@@ -41,12 +43,14 @@ namespace CivilReportApplication
             {
 
                 var reader = new XmlReader(filePath);
-                var allRows = reader.ReadFile("CoordGeom");
-                this.progressBar1.Maximum = allRows;
+                reader.ReadFile("CoordGeom");
+                this.reportName = reader.ReportName("CoordGeom");
+                this.countInfo = reader.CountReportInfo();
+                this.progressBar1.Maximum = countInfo*2+1;
                 this.progressBar1.Step = 1;
                 this.progressBar1.Value = 0;
                 this.exportDto = new List<AlignmentReportDto>();
-                for (int i = 0; i < allRows; i++)
+                for (int i = 0; i < countInfo; i++)
                 {
                    var dto= reader.ReadRow(i);
                     this.exportDto.Add(dto);
@@ -61,7 +65,42 @@ namespace CivilReportApplication
                 return;
             }
 
+            var wrtier = new ExcelWriter(outputDirectory);
+            wrtier.CreateWorkbook();
+            var headingsColum = new string[] { "Nо", "Тип", "Начален км", "Краен км", "Дължина", "Радиус", "А", "Полигонов ъгъл", "Начална точка", "Крайна точка" };
+            var progress = this.progressBar1.Value;
+            progress++;
+            this.progressBar1.Value = progress;
+            wrtier.AddRow(headingsColum, 4);
+            for (int i = 0; i < countInfo; i++)
+            {
+                var currentRow = this.exportDto[i];
+                wrtier.AddRow(currentRow, 5 + i);
 
+                this.progressBar1.Value = progress + 1 + i;
+            }
+
+            if (string.IsNullOrEmpty(outputDirectory))
+            {
+                var temp = filePath.LastIndexOf("\\");
+                var directory = string.Concat(filePath.Take(temp));
+                outputDirectory = directory;
+            }
+            if (string.IsNullOrEmpty(this.textBox3.Text) == false)
+            {
+                this.reportName = textBox3.Text;
+            }
+            wrtier.AddHeading($"Данни за ситуация за {reportName}");
+            if (checkBox1.Checked)
+            {
+                wrtier.AddHeader(this.txtBox4.Lines);
+            }
+
+            if (checkBox2.Checked)
+            {
+                wrtier.AddFooter(reportName);
+            }
+            wrtier.CreateFile(outputDirectory,"sit" ,reportName);
 
         }
 

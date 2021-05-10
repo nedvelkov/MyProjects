@@ -22,7 +22,16 @@ namespace CivilReportApplication.Models
             this.filePath = filePath;
         }
 
-        public int ReadFile(string reportType)
+        public int CountReportInfo()
+        {
+            if (this.reportList==null)
+            {
+                throw new NotImplementedException("No infor about report type");
+            }
+            return this.reportList.Count;
+        }
+
+        public void ReadFile(string reportType)
         {
             var xmlDocument = XDocument.Load(this.filePath);
 
@@ -55,9 +64,9 @@ namespace CivilReportApplication.Models
                 .First()
                 .Elements()
                 .ToList();
-
-            return this.reportList.Count;
         }
+
+
 
         public string ReportName(string reportType)
         {
@@ -80,19 +89,25 @@ namespace CivilReportApplication.Models
         {
             var row = this.reportList[index];
             var element = row.Name.LocalName;
-            double radius = default;
-            double angleBeta = default;
-            double parameterA = default;
             var length = double.Parse(row.Attributes().ToList().First(x => x.Name == "length").Value);
+            var exportDto = new AlignmentReportDto
+            {
+                Id = index + 1,
+                Element = element,
+                LengthElement = length,
+            };
             if (element == "Curve")
             {
-                radius = double.Parse(row.Attributes().ToList().First(x => x.Name == "radius").Value);
+               var radius = double.Parse(row.Attributes().ToList().First(x => x.Name == "radius").Value);
                 var alfa = double.Parse(row.Attributes().ToList().First(x => x.Name == "delta").Value);
+                double angleBeta;
                 if (this.units == "decimal degrees")
                 {
-                    angleBeta = (180 - alfa) / 0.9;
+                   angleBeta = (180 - alfa) / 0.9;
                 }
                 else angleBeta = 200 - alfa;
+                exportDto.Radius = radius;
+                exportDto.AngleBeta = angleBeta;
             }
             if (element == "Spiral")
             {
@@ -101,19 +116,9 @@ namespace CivilReportApplication.Models
                 var endSpiral = row.Attributes().ToList().First(a => a.Name == "radiusEnd").Value;
                 double.TryParse(startSpiral, out radiusSpiral);
                 double.TryParse(endSpiral, out radiusSpiral);
-                parameterA = Math.Sqrt(radiusSpiral * length);
+               var parameterA = Math.Sqrt(radiusSpiral * length);
+                exportDto.ParameterA = parameterA;
             }
-            var exportDto = new AlignmentReportDto
-            {
-                Id = index + 1,
-                Element = element,
-                LengthElement = length,
-                Radius = radius,
-                ParameterA = parameterA,
-                AngleBeta = angleBeta,
-
-
-            };
 
             if (index==0)
             {
