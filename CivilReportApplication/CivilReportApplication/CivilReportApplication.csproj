@@ -58,6 +58,18 @@
     <Compile Include="DtoExportModels\AlignmentReportDto.cs" />
     <Compile Include="DtoExportModels\ColumsExcel.cs" />
     <Compile Include="DtoExportModels\Point.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeometryReportProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeometryReportProfile.Designer.cs">
+      <DependentUpon>GeometryReportProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +108,12 @@
     </Compile>
     <EmbeddedResource Include="CoridorHtml.resx">
       <DependentUpon>CoridorHtml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeometryReportProfile.resx">
+      <DependentUpon>GeometryReportProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
