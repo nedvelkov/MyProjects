@@ -11,7 +11,7 @@ namespace CivilReportApplication.Models
 {
     public class HtmlReader
     {
-        private string filePath;
+        private readonly string filePath;
         private int stationIndex;
         private int designElevation;
 
@@ -50,7 +50,7 @@ namespace CivilReportApplication.Models
         {
             var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
 
-            var currentRow = data(allRows[index].InnerHtml);
+            var currentRow = Data(allRows[index].InnerHtml);
 
             if (index == 0)
             {
@@ -73,7 +73,7 @@ namespace CivilReportApplication.Models
         {
             var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
 
-            var currentRow = data(allRows[index].InnerHtml);
+            var currentRow = Data(allRows[index].InnerHtml);
 
             var station = double.Parse(currentRow[stationIndex].Replace("+", ""));
 
@@ -103,7 +103,7 @@ namespace CivilReportApplication.Models
 
         }
 
-        private string[] data(string html)
+        private string[] Data(string html)
         {
             var currentRow = new HtmlDocument();
 

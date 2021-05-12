@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.DtoExportModels
+﻿namespace CivilReportApplication.DtoExportModels
 {
-    public enum ColumsExcel
+    public enum ColumsAlignmentExcel
     {
         Id = 1,
         Element = 2,

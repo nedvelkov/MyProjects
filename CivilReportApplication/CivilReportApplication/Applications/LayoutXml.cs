@@ -148,5 +148,9 @@ namespace CivilReportApplication
             }
         }
 
+        private void LayoutXml_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

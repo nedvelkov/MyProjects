@@ -1,16 +1,15 @@
-﻿using CivilReportApplication.DtoExportModels;
+﻿namespace CivilReportApplication.Models
+{
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace CivilReportApplication.Models
-{
+using CivilReportApplication.DtoExportModels;
+
     public class XmlReader
     {
-        private string filePath;
+        private readonly string filePath;
         private List<XElement> reportList;
         private double startStation;
         private string units;
@@ -111,9 +110,9 @@ namespace CivilReportApplication.Models
             }
             if (element == "Spiral")
             {
-                double radiusSpiral;
                 var startSpiral = row.Attributes().ToList().First(x => x.Name == "radiusStart").Value;
                 var endSpiral = row.Attributes().ToList().First(a => a.Name == "radiusEnd").Value;
+                double radiusSpiral;
                 double.TryParse(startSpiral, out radiusSpiral);
                 double.TryParse(endSpiral, out radiusSpiral);
                var parameterA = Math.Sqrt(radiusSpiral * length);
@@ -124,7 +123,7 @@ namespace CivilReportApplication.Models
             {
                 exportDto.StartStation = startStation;
                 exportDto.EndStation = startStation+ length;
-                this.station = length;
+                this.station =startStation+ length;
             }
             else
             {

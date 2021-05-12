@@ -10,16 +10,29 @@ using System.Windows.Forms;
 
 namespace CivilReportApplication
 {
-    public partial class GeometryReportProfile : Form
+    public partial class SelectHtmlForm : Form
     {
-        public GeometryReportProfile()
+        public SelectHtmlForm()
         {
             InitializeComponent();
         }
 
+        public string ReportType { get; set; }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.ReportType = "Layout";
+            this.Close();
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.ReportType = "Coridor";
+            this.Close();
+
+
         }
     }
 }

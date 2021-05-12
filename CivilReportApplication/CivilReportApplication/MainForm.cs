@@ -17,12 +17,16 @@ namespace CivilReportApplication
             InitializeComponent();
         }
 
-        private void btn1_Click(object sender, EventArgs e)
+        private void Btn1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            
-            LayoutXml form2 = new LayoutXml();
-            form2.ShowDialog();
+            using (LayoutXml form2 = new LayoutXml())
+            {
+                form2.ShowDialog();
+
+            }
+            this.Show();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,30 +34,67 @@ namespace CivilReportApplication
 
         }
 
-        private void exitBtn_Click(object sender, EventArgs e)
+        private void ExitBtn_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AlignmentReport form3 = new AlignmentReport();
-            form3.ShowDialog();
+            using (AlignmentReport form3 = new AlignmentReport())
+            {
+                form3.ShowDialog();
+
+            }
+            this.Show();
+
         }
 
-        private void btn2_Click(object sender, EventArgs e)
+        private void Btn2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SelectHtmlForm form = new SelectHtmlForm();
-            form.ShowDialog();
+            string reportType;
+
+            using (SelectHtmlForm form = new SelectHtmlForm())
+            {
+
+                form.ShowDialog();
+                reportType = form.ReportType;
+            }
+            switch (reportType)
+            {
+                case "Layout":
+                    using (formHtml layoutHTML = new formHtml())
+                    {
+
+                        layoutHTML.ShowDialog();
+                    }
+                    break;
+                case "Coridor":
+                    using (CoridorHtml form = new CoridorHtml())
+                    {
+                        form.ShowDialog();
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            this.Show();
+
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Form1 form = new Form1();
-            form.ShowDialog();
+            using (GeometryReportProfile form = new GeometryReportProfile())
+            {
+                form.ShowDialog();
+            }
+
+            this.Show();
+
         }
     }
 }

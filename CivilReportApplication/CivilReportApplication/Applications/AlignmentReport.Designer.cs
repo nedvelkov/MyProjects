@@ -29,6 +29,7 @@ namespace CivilReportApplication
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlignmentReport));
             this.rtnBtn = new System.Windows.Forms.Button();
             this.loadXml = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -54,7 +55,7 @@ namespace CivilReportApplication
             this.rtnBtn.TabIndex = 0;
             this.rtnBtn.Text = "Return";
             this.rtnBtn.UseVisualStyleBackColor = true;
-            this.rtnBtn.Click += new System.EventHandler(this.rtnBtn_Click);
+            this.rtnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // loadXml
             // 
@@ -64,7 +65,7 @@ namespace CivilReportApplication
             this.loadXml.TabIndex = 1;
             this.loadXml.Text = "Load XML file";
             this.loadXml.UseVisualStyleBackColor = true;
-            this.loadXml.Click += new System.EventHandler(this.loadXml_Click);
+            this.loadXml.Click += new System.EventHandler(this.LoadXml_Click);
             // 
             // textBox1
             // 
@@ -83,7 +84,7 @@ namespace CivilReportApplication
             this.saveBtn.TabIndex = 3;
             this.saveBtn.Text = "Save location";
             this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // textBox2
             // 
@@ -131,7 +132,7 @@ namespace CivilReportApplication
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "Add header";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -153,7 +154,7 @@ namespace CivilReportApplication
             this.button1.TabIndex = 11;
             this.button1.Text = "Create";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // progressBar1
             // 
@@ -175,7 +176,7 @@ namespace CivilReportApplication
             this.txtBox4.TabIndex = 13;
             this.txtBox4.Text = "";
             // 
-            // Form3
+            // AlignmentReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,10 +194,11 @@ namespace CivilReportApplication
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.loadXml);
             this.Controls.Add(this.rtnBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(700, 500);
             this.MinimumSize = new System.Drawing.Size(350, 300);
-            this.Name = "Form3";
-            this.Text = "Form3";
+            this.Name = "AlignmentReport";
+            this.Text = "Alignment report";
             this.ResumeLayout(false);
             this.PerformLayout();
 

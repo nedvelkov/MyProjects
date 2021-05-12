@@ -29,6 +29,7 @@ namespace CivilReportApplication
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LayoutXml));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -142,10 +143,12 @@ namespace CivilReportApplication
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.textBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(700, 300);
             this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "LayoutXml";
-            this.Text = "Layout file from XML";
+            this.Text = "XML report for layout";
+            this.Load += new System.EventHandler(this.LayoutXml_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

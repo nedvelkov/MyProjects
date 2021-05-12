@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CivilReportApplication.Models;
 
 namespace CivilReportApplication
 {
@@ -24,7 +23,7 @@ namespace CivilReportApplication
             InitializeComponent();
         }
 
-        private void loadBtn_Click(object sender, EventArgs e)
+        private void LoadBtn_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog() { Multiselect = false, Filter = "HTML files|*.html" };
 
@@ -48,7 +47,7 @@ namespace CivilReportApplication
             }
         }
 
-        private void saveBtn_Click(object sender, EventArgs e)
+        private void SaveBtn_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
@@ -59,14 +58,14 @@ namespace CivilReportApplication
             textBox2.Text = outputDirectory;
         }
         
-        private void rtnBtn_Click(object sender, EventArgs e)
+        private void ReturnBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
             MainForm form1 = new MainForm();
             form1.ShowDialog();
         }
 
-        private void createBtn_Click(object sender, EventArgs e)
+        private void CreateBtn_Click(object sender, EventArgs e)
         {
 
             var points = this.chkListBox1.CheckedItems;

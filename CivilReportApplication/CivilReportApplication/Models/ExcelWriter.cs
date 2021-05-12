@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace CivilReportApplication.Models
+﻿namespace CivilReportApplication.Models
 {
 
 
+    using System;
+    using System.Text;
     using System.Runtime.InteropServices;
     using Excel = Microsoft.Office.Interop.Excel;
 
@@ -17,18 +12,13 @@ namespace CivilReportApplication.Models
 
     public class ExcelWriter
     {
-        private string outputDirectory;
-        private string headingTable;
+        private readonly string outputDirectory;
         private int lastRow;
 
         //excel objects
         private Excel.Application app;
         private Excel.Workbook workbook;
         private Excel.Worksheet xlWorkSheet;
-
-        private Excel.Style styleHeading1;
-        private Excel.Style styleHeading2;
-        private Excel.Style styleCellNormal;
 
 
         private object misValue;
@@ -49,35 +39,10 @@ namespace CivilReportApplication.Models
             CreateWorksheet();
         }
 
-        private void CreateStyles()
+        public void AddHeading(string heading,int endColm)
         {
-            this.styleHeading1 = this.workbook.Styles.Add("HeadingStyle1");
-            styleHeading1.Font.Size = 12;
-
-
-            //Style myStyle = workbook.Styles.Add("My Style");
-
-            //// Specify the style's format characteristics.
-            //    // Set the font color to blue.
-            //    myStyle.Font.Color = Color.Blue;
-
-            //    // Set the font size to 12.
-            //    myStyle.Font.Size = 12;
-
-            //    // Center text in cells.
-            //    myStyle.Alignment.Horizontal = SpreadsheetHorizontalAlignment.Center;
-
-            //    // Set the background fill.
-            //    myStyle.Fill.BackgroundColor = Color.LightBlue;
-            //    myStyle.Fill.PatternType = PatternType.LightGray;
-            //    myStyle.Fill.PatternColor = Color.Yellow;
-
-        }
-
-        public void AddHeading(string heading)
-        {
-
-            var range = this.xlWorkSheet.Range["A2", "J2"];
+            var endHeading = $"{((ColmName)endColm).ToString()}2";
+            var range = this.xlWorkSheet.Range["A2", endHeading];
             range.Merge();
             range.HorizontalAlignment = 3;//Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             range.VerticalAlignment = 3;// Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
@@ -98,6 +63,12 @@ namespace CivilReportApplication.Models
             cell.Font.Bold = true;
             cell.BorderAround(Excel.XlLineStyle.xlContinuous);
         }
+
+        private void FormatStationCell(int row,int colm)
+        {
+            var cell = this.xlWorkSheet.Cells[row, colm];
+            cell.NumberFormat = "0+000.00";
+        }
         private void FormatCellTable(int row, int colm)
         {
             var cell = this.xlWorkSheet.Cells[row, colm];
@@ -105,10 +76,8 @@ namespace CivilReportApplication.Models
             cell.VerticalAlignment = 3;
             cell.Font.Name = "Arial Narrow";
             cell.Font.Size = 10;
-            cell.BorderAround(Excel.XlLineStyle.xlContinuous); 
-            //BorderAround(Excel.XlLineStyle.xlContinuous,
-            //Excel.XlBorderWeight.xlMedium, Excel.XlColorIndex.xlColorIndexAutomatic,
-            //Excel.XlColorIndex.xlColorIndexAutomatic);
+            cell.BorderAround(Excel.XlLineStyle.xlContinuous);
+
         }
 
         public void AddRow(string[] array, int rowNum)
@@ -128,7 +97,7 @@ namespace CivilReportApplication.Models
             var allProperties = report.GetType().GetProperties();
             foreach (var property in allProperties)
             {
-                int colmNum = (int)Enum.Parse(typeof(ColumsExcel), property.Name);
+                int colmNum = (int)Enum.Parse(typeof(ColumsAlignmentExcel), property.Name);
                 var value = property.GetValue(report);
 
                 if (value == null) value = "";
@@ -138,6 +107,41 @@ namespace CivilReportApplication.Models
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
+                    if (property.Name.Contains("Station"))
+                    {
+                        FormatStationCell(rowNum, colmNum);
+                    }
+                    FormatCellTable(rowNum, colmNum);
+                    xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
+                    //CreateCellBorder(rowNum, colmNum);
+                    continue;
+                }
+                FormatCellTable(rowNum, colmNum);
+                xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
+                // CreateCellBorder(rowNum, colmNum);
+            }
+
+
+        }
+        public void AddRow(ProfileReportDto report, int rowNum)
+        {
+            var allProperties = report.GetType().GetProperties();
+            foreach (var property in allProperties)
+            {
+                int colmNum = (int)Enum.Parse(typeof(ColumsProfileExcel), property.Name);
+                var value = property.GetValue(report);
+
+                if (value == null) value = "";
+
+                //var type = value.GetType().ToString();
+
+                if (value.GetType().ToString() == "System.Double")
+                {
+                    var wrtiteValue = ((double)value).ToString("f2");
+                    if (property.Name.Contains("Station"))
+                    {
+                        FormatStationCell(rowNum, colmNum);
+                    }
                     FormatCellTable(rowNum, colmNum);
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
                     //CreateCellBorder(rowNum, colmNum);
@@ -159,7 +163,7 @@ namespace CivilReportApplication.Models
                 sb.AppendLine(item);
             }
             var allText = sb.ToString().TrimEnd();
-            this.xlWorkSheet.PageSetup.LeftHeader=allText;
+            this.xlWorkSheet.PageSetup.LeftHeader = allText;
         }
 
         public void AddFooter(string footer)
@@ -176,7 +180,7 @@ namespace CivilReportApplication.Models
         }
 
 
-        public void CreateFile(string outputDirectory,string reportType ,string reportName)
+        public void CreateFile(string outputDirectory, string reportType, string reportName)
         {
             FormatWidthColm(10);
 

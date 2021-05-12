@@ -29,6 +29,7 @@ namespace CivilReportApplication
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CoridorHtml));
             this.loadBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -48,7 +49,7 @@ namespace CivilReportApplication
             this.loadBtn.TabIndex = 0;
             this.loadBtn.Text = "Load Html file";
             this.loadBtn.UseVisualStyleBackColor = true;
-            this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
+            this.loadBtn.Click += new System.EventHandler(this.LoadBtn_Click);
             // 
             // saveBtn
             // 
@@ -58,7 +59,7 @@ namespace CivilReportApplication
             this.saveBtn.TabIndex = 1;
             this.saveBtn.Text = "Save location";
             this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // textBox1
             // 
@@ -97,7 +98,7 @@ namespace CivilReportApplication
             this.rtnBtn.TabIndex = 6;
             this.rtnBtn.Text = "Return";
             this.rtnBtn.UseVisualStyleBackColor = true;
-            this.rtnBtn.Click += new System.EventHandler(this.rtnBtn_Click);
+            this.rtnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // createBtn
             // 
@@ -109,7 +110,7 @@ namespace CivilReportApplication
             this.createBtn.TabIndex = 7;
             this.createBtn.Text = "Create files";
             this.createBtn.UseVisualStyleBackColor = true;
-            this.createBtn.Click += new System.EventHandler(this.createBtn_Click);
+            this.createBtn.Click += new System.EventHandler(this.CreateBtn_Click);
             // 
             // progressBar1
             // 
@@ -143,10 +144,11 @@ namespace CivilReportApplication
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.loadBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(700, 300);
             this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "CoridorHtml";
-            this.Text = "CorirodHtml";
+            this.Text = "Corirod HTML report for layout";
             this.ResumeLayout(false);
             this.PerformLayout();
 

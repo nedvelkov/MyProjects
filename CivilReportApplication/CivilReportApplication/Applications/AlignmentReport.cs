@@ -25,19 +25,19 @@ namespace CivilReportApplication
             InitializeComponent();
         }
 
-        private void rtnBtn_Click(object sender, EventArgs e)
+        private void ReturnBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
             MainForm form1 = new MainForm();
             form1.ShowDialog();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -65,17 +65,17 @@ namespace CivilReportApplication
                 return;
             }
 
-            var wrtier = new ExcelWriter(outputDirectory);
-            wrtier.CreateWorkbook();
+            var writer = new ExcelWriter(outputDirectory);
+            writer.CreateWorkbook();
             var headingsColum = new string[] { "Nо", "Тип", "Начален км", "Краен км", "Дължина", "Радиус", "А", "Полигонов ъгъл", "Начална точка", "Крайна точка" };
             var progress = this.progressBar1.Value;
             progress++;
             this.progressBar1.Value = progress;
-            wrtier.AddRow(headingsColum, 4);
+            writer.AddRow(headingsColum, 4);
             for (int i = 0; i < countInfo; i++)
             {
                 var currentRow = this.exportDto[i];
-                wrtier.AddRow(currentRow, 5 + i);
+                writer.AddRow(currentRow, 5 + i);
 
                 this.progressBar1.Value = progress + 1 + i;
             }
@@ -90,21 +90,21 @@ namespace CivilReportApplication
             {
                 this.reportName = textBox3.Text;
             }
-            wrtier.AddHeading($"Данни за ситуация за {reportName}");
+            writer.AddHeading($"Данни за ситуация за {reportName}",10);
             if (checkBox1.Checked)
             {
-                wrtier.AddHeader(this.txtBox4.Lines);
+                writer.AddHeader(this.txtBox4.Lines);
             }
 
             if (checkBox2.Checked)
             {
-                wrtier.AddFooter(reportName);
+                writer.AddFooter(reportName);
             }
-            wrtier.CreateFile(outputDirectory,"sit" ,reportName);
+            writer.CreateFile(outputDirectory,"sit" ,reportName);
 
         }
 
-        private void loadXml_Click(object sender, EventArgs e)
+        private void LoadXml_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog() { Multiselect = false, Filter = "XML files|*.xml" };
 
@@ -120,7 +120,7 @@ namespace CivilReportApplication
             }
         }
 
-        private void saveBtn_Click(object sender, EventArgs e)
+        private void SaveBtn_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)

@@ -29,6 +29,7 @@ namespace CivilReportApplication
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formHtml));
             this.rtnBtn = new System.Windows.Forms.Button();
             this.loadHtml = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -49,7 +50,7 @@ namespace CivilReportApplication
             this.rtnBtn.TabIndex = 0;
             this.rtnBtn.Text = "Return";
             this.rtnBtn.UseVisualStyleBackColor = true;
-            this.rtnBtn.Click += new System.EventHandler(this.rtnBtn_Click);
+            this.rtnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // loadHtml
             // 
@@ -59,7 +60,7 @@ namespace CivilReportApplication
             this.loadHtml.TabIndex = 1;
             this.loadHtml.Text = "Load HTML file";
             this.loadHtml.UseVisualStyleBackColor = true;
-            this.loadHtml.Click += new System.EventHandler(this.loadHtml_Click);
+            this.loadHtml.Click += new System.EventHandler(this.LoadHtml_Click);
             // 
             // textBox1
             // 
@@ -78,7 +79,7 @@ namespace CivilReportApplication
             this.saveBtn.TabIndex = 4;
             this.saveBtn.Text = "Save location";
             this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // textBox2
             // 
@@ -128,7 +129,7 @@ namespace CivilReportApplication
             this.crtBtn.TabIndex = 9;
             this.crtBtn.Text = "Create file";
             this.crtBtn.UseVisualStyleBackColor = true;
-            this.crtBtn.Click += new System.EventHandler(this.crtBtn_Click);
+            this.crtBtn.Click += new System.EventHandler(this.CreateBtn_Click);
             // 
             // formHtml
             // 
@@ -144,11 +145,12 @@ namespace CivilReportApplication
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.loadHtml);
             this.Controls.Add(this.rtnBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(700, 300);
             this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "formHtml";
-            this.Text = "LayoutHTML";
-            this.Load += new System.EventHandler(this.formHtml_Load);
+            this.Text = "Surface profile HTML report for layout";
+            this.Load += new System.EventHandler(this.FormHtml_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
