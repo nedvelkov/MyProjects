@@ -139,7 +139,7 @@ using CivilReportApplication.DtoExportModels;
                 if (itemName == "Start" || itemName == "End")
                 {
                     var value = item.Value.Split();
-                    var point = new Point
+                    var point = new PointCoordinate
                     {
                         X = double.Parse(value[1]),
                         Y = double.Parse(value[0])

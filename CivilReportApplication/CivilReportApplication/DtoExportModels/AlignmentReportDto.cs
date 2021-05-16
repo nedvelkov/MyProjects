@@ -24,9 +24,9 @@ namespace CivilReportApplication.DtoExportModels
 
         public double? AngleBeta { get; set; }
 
-        public Point Start { get; set; }
+        public PointCoordinate Start { get; set; }
 
-        public Point End { get; set; }
+        public PointCoordinate End { get; set; }
 
 
     }

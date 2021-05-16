@@ -39,7 +39,7 @@ namespace CivilReportApplication
             }
 
             this.reader = new HtmlReader(filePath);
-            this.codes= reader.PointCodes();
+            this.codes= reader.PointCodesLayout();
 
             foreach (var code in codes)
             {
@@ -74,7 +74,8 @@ namespace CivilReportApplication
                 MessageBox.Show("Chose point/points");
                 return;
             }
-            var allRows = reader.ReadHtml();
+            reader.ReadHtml();
+            var allRows = reader.TotalRows();
             this.progressBar1.Maximum = (allRows-2) * points.Count;
             this.progressBar1.Step = 1;
             int progress = 0;

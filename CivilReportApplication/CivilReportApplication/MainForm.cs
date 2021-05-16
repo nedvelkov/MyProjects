@@ -96,5 +96,25 @@ namespace CivilReportApplication
             this.Show();
 
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (SurfaceProfileReport form = new SurfaceProfileReport())
+            {
+                form.ShowDialog();
+            }
+            this.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (Form1 form=new Form1())
+            {
+                form.ShowDialog();
+            }
+            this.Show();
+        }
     }
 }

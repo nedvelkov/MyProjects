@@ -155,6 +155,51 @@
 
         }
 
+        public void AddRow(SurfaceProfileReportDto report,int rowNum)
+        {
+            var allProperties = report.GetType().GetProperties();
+            foreach (var property in allProperties)
+            {
+                int colmNum = (int)Enum.Parse(typeof(ColumsSurfaceProfileExcel), property.Name);
+                var value = property.GetValue(report);
+
+                if (value == null) value = "";
+                ;
+                //var type = value.GetType().ToString();
+
+                if (value.GetType().ToString() == "System.Double")
+                {
+                    var wrtiteValue = ((double)value).ToString("f2");
+                    if (property.Name.Contains("Station"))
+                    {
+                        FormatStationCell(rowNum, colmNum);
+                    }
+                    FormatCellTable(rowNum, colmNum);
+                    xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
+                    continue;
+                }
+                FormatCellTable(rowNum, colmNum);
+                xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
+
+            }
+
+            var diff = report.Difference();
+            if (diff!=null)
+            {
+                var wrtiteValue = ((double)diff).ToString("f0");
+
+                FormatCellTable(rowNum, 6);
+                xlWorkSheet.Cells[rowNum, 6] = wrtiteValue;
+            }
+            else
+            {
+                FormatCellTable(rowNum, 6);
+                xlWorkSheet.Cells[rowNum, 6] = diff.ToString();
+            }
+
+            
+        }
+
         public void AddHeader(string[] text)
         {
             var sb = new StringBuilder();

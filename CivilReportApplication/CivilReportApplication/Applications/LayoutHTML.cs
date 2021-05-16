@@ -60,7 +60,9 @@ namespace CivilReportApplication
             
             var reader = new HtmlReader(filePath);
 
-            this.prBar1.Maximum=reader.ReadHtml();
+            reader.ReadHtml();
+
+            this.prBar1.Maximum=reader.TotalRows();
 
             if (string.IsNullOrEmpty(textBox3.Text))
             {

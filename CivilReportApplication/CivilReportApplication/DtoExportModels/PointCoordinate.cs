@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CivilReportApplication.DtoExportModels
 {
-   public class Point
+   public class PointCoordinate
     {
         public double X { get; set; }
         

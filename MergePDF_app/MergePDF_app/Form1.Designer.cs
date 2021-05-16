@@ -45,7 +45,7 @@ namespace MergePDF_app
             // 
             // input
             // 
-            this.input.Location = new System.Drawing.Point(34, 54);
+            this.input.Location = new System.Drawing.Point(34, 25);
             this.input.Name = "input";
             this.input.ShortcutsEnabled = false;
             this.input.Size = new System.Drawing.Size(181, 20);
@@ -54,7 +54,7 @@ namespace MergePDF_app
             // 
             // output
             // 
-            this.output.Location = new System.Drawing.Point(34, 103);
+            this.output.Location = new System.Drawing.Point(34, 63);
             this.output.Name = "output";
             this.output.Size = new System.Drawing.Size(181, 20);
             this.output.TabIndex = 1;
@@ -62,7 +62,7 @@ namespace MergePDF_app
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(255, 49);
+            this.button1.Location = new System.Drawing.Point(255, 20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(149, 29);
             this.button1.TabIndex = 4;
@@ -72,7 +72,7 @@ namespace MergePDF_app
             // 
             // Merge
             // 
-            this.Merge.Location = new System.Drawing.Point(34, 199);
+            this.Merge.Location = new System.Drawing.Point(34, 125);
             this.Merge.Name = "Merge";
             this.Merge.Size = new System.Drawing.Size(370, 32);
             this.Merge.TabIndex = 5;
@@ -82,7 +82,7 @@ namespace MergePDF_app
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(34, 148);
+            this.textBox1.Location = new System.Drawing.Point(34, 99);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(181, 20);
             this.textBox1.TabIndex = 6;
@@ -90,7 +90,7 @@ namespace MergePDF_app
             // 
             // savePathBtn
             // 
-            this.savePathBtn.Location = new System.Drawing.Point(255, 95);
+            this.savePathBtn.Location = new System.Drawing.Point(255, 55);
             this.savePathBtn.Name = "savePathBtn";
             this.savePathBtn.Size = new System.Drawing.Size(149, 34);
             this.savePathBtn.TabIndex = 11;
@@ -101,7 +101,7 @@ namespace MergePDF_app
             // nameCombinePdf
             // 
             this.nameCombinePdf.AutoSize = true;
-            this.nameCombinePdf.Location = new System.Drawing.Point(252, 155);
+            this.nameCombinePdf.Location = new System.Drawing.Point(252, 102);
             this.nameCombinePdf.Name = "nameCombinePdf";
             this.nameCombinePdf.Size = new System.Drawing.Size(117, 13);
             this.nameCombinePdf.TabIndex = 12;
@@ -109,7 +109,7 @@ namespace MergePDF_app
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(34, 264);
+            this.progressBar1.Location = new System.Drawing.Point(34, 163);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(370, 32);
             this.progressBar1.TabIndex = 13;
@@ -134,7 +134,7 @@ namespace MergePDF_app
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 327);
+            this.ClientSize = new System.Drawing.Size(434, 211);
             this.Controls.Add(this.progress);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.nameCombinePdf);
@@ -145,6 +145,8 @@ namespace MergePDF_app
             this.Controls.Add(this.output);
             this.Controls.Add(this.input);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(450, 250);
+            this.MinimumSize = new System.Drawing.Size(450, 250);
             this.Name = "Form1";
             this.Text = "Merge PDF";
             this.ResumeLayout(false);

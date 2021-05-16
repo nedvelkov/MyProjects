@@ -36,10 +36,9 @@ namespace CivilReportApplication
         {
             List<ProfileReportDto> profileReport = new List<ProfileReportDto>();
 
-            int allColms = 0;
             try
             {
-                allColms = this.dataGridView1.Rows.Count - 1;
+               int allColms = this.dataGridView1.Rows.Count - 1;
                 if (allColms == 0)
                 {
                     throw new Exception();
