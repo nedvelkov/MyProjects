@@ -30,7 +30,6 @@ namespace CivilReportApplication
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlignmentReport));
-            this.rtnBtn = new System.Windows.Forms.Button();
             this.loadXml = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveBtn = new System.Windows.Forms.Button();
@@ -44,18 +43,6 @@ namespace CivilReportApplication
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.txtBox4 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // rtnBtn
-            // 
-            this.rtnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtnBtn.Location = new System.Drawing.Point(176, 176);
-            this.rtnBtn.Name = "rtnBtn";
-            this.rtnBtn.Size = new System.Drawing.Size(140, 30);
-            this.rtnBtn.TabIndex = 0;
-            this.rtnBtn.Text = "Return";
-            this.rtnBtn.UseVisualStyleBackColor = true;
-            this.rtnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // loadXml
             // 
@@ -147,10 +134,11 @@ namespace CivilReportApplication
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(12, 176);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 30);
+            this.button1.Size = new System.Drawing.Size(303, 30);
             this.button1.TabIndex = 11;
             this.button1.Text = "Create";
             this.button1.UseVisualStyleBackColor = true;
@@ -193,7 +181,6 @@ namespace CivilReportApplication
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.loadXml);
-            this.Controls.Add(this.rtnBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(700, 500);
             this.MinimumSize = new System.Drawing.Size(350, 300);
@@ -205,8 +192,6 @@ namespace CivilReportApplication
         }
 
         #endregion
-
-        private System.Windows.Forms.Button rtnBtn;
         private System.Windows.Forms.Button loadXml;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button saveBtn;

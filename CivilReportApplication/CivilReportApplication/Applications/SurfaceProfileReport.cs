@@ -83,7 +83,7 @@ namespace CivilReportApplication
             writer.CreateWorkbook();
             var headingsColum = new string[] { "КМ", "X", "Y", "Кота терен", "Кота нивлета", "Рабона разлика", "Точка" };
             var progress = this.progressBar1.Value;
-            progress++;
+            progress+=2;
             this.progressBar1.Value = progress;
             writer.AddRow(headingsColum, 4);
             for (int i = 0; i < report.Count; i++)
@@ -115,8 +115,27 @@ namespace CivilReportApplication
             {
                 writer.AddFooter(reportName);
             }
+
+            int starRow = 5;
+            int endRow = 5 + report.Count - 1;
+            int startColm = 1;
+            int endColm = 7;
+            writer.FormatTable(starRow, endRow, startColm, endColm);
+            writer.FormatStationColm(starRow, endRow, 1);
+
             writer.CreateFile(outputDirectory, "ter", reportName);
             ;
+
+            DialogResult res = MessageBox.Show("Report created. Do you want to open report", "Sucsseful", MessageBoxButtons.YesNo);
+
+
+            if (res == DialogResult.Yes)
+            {
+
+                System.Diagnostics.Process.Start($"{outputDirectory}\\ter_{reportName}.xls");
+
+            }
+
         }
 
         private SurfaceProfileReportDto ReadRow(string[] array)

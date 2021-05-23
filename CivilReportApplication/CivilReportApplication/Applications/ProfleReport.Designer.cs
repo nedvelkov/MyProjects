@@ -31,7 +31,6 @@ namespace CivilReportApplication
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfleReport));
-            this.returnBtn = new System.Windows.Forms.Button();
             this.reportBtn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -62,24 +61,13 @@ namespace CivilReportApplication
             ((System.ComponentModel.ISupportInitialize)(this.profileGeometryDtoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // returnBtn
-            // 
-            this.returnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.returnBtn.Location = new System.Drawing.Point(176, 376);
-            this.returnBtn.Name = "returnBtn";
-            this.returnBtn.Size = new System.Drawing.Size(1240, 30);
-            this.returnBtn.TabIndex = 0;
-            this.returnBtn.Text = "Return";
-            this.returnBtn.UseVisualStyleBackColor = true;
-            this.returnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
-            // 
             // reportBtn
             // 
-            this.reportBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.reportBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.reportBtn.Location = new System.Drawing.Point(12, 376);
             this.reportBtn.Name = "reportBtn";
-            this.reportBtn.Size = new System.Drawing.Size(140, 30);
+            this.reportBtn.Size = new System.Drawing.Size(1403, 30);
             this.reportBtn.TabIndex = 2;
             this.reportBtn.Text = "Create report";
             this.reportBtn.UseVisualStyleBackColor = true;
@@ -197,6 +185,7 @@ namespace CivilReportApplication
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1400, 174);
             this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // noDataGridViewTextBoxColumn
             // 
@@ -303,7 +292,6 @@ namespace CivilReportApplication
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.reportBtn);
-            this.Controls.Add(this.returnBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1450, 500);
             this.MinimumSize = new System.Drawing.Size(1450, 500);
@@ -318,8 +306,6 @@ namespace CivilReportApplication
         }
 
         #endregion
-
-        private System.Windows.Forms.Button returnBtn;
         private System.Windows.Forms.Button reportBtn;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;

@@ -15,14 +15,15 @@ namespace CivilReportApplication
 {
     public partial class ProfleReport : Form
     {
+
+        public List<ProfileGeometryDto> ProfileGeometry { get; set; }
+        private string outputDirectory;
+  
         public ProfleReport()
         {
             InitializeComponent();
             this.ProfileGeometry = new List<ProfileGeometryDto>();
         }
-
-        public List<ProfileGeometryDto> ProfileGeometry { get; set; }
-        private string outputDirectory;
 
         private void ReturnBtn_Click(object sender, EventArgs e)
         {
@@ -121,9 +122,27 @@ namespace CivilReportApplication
             {
                 writer.AddFooter(textBox2.Text);
             }
+
+            int starRow = 5;
+            int endRow = 5 + profileReport.Count - 1;
+            int startColm = 1;
+            int endColm = 6;
+            writer.FormatTable(starRow, endRow, startColm, endColm);
+            writer.FormatStationColm(starRow, endRow, 2);
+
+
             writer.CreateFile(outputDirectory, "niv", textBox2.Text);
             ;
 
+            DialogResult res = MessageBox.Show("Report created. Do you want to open report", "Sucsseful", MessageBoxButtons.YesNo);
+
+
+            if (res == DialogResult.Yes)
+            {
+
+                System.Diagnostics.Process.Start($"{outputDirectory}\\niv_{textBox2.Text}.xls");
+
+            }
 
             ;
         }
@@ -152,6 +171,11 @@ namespace CivilReportApplication
             }
 
             textBox1.Text = outputDirectory;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

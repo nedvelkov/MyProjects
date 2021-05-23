@@ -35,7 +35,6 @@ namespace CivilReportApplication
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.chkListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.rtnBtn = new System.Windows.Forms.Button();
             this.createBtn = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -89,24 +88,13 @@ namespace CivilReportApplication
             this.chkListBox1.Size = new System.Drawing.Size(304, 49);
             this.chkListBox1.TabIndex = 5;
             // 
-            // rtnBtn
-            // 
-            this.rtnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtnBtn.Location = new System.Drawing.Point(176, 176);
-            this.rtnBtn.Name = "rtnBtn";
-            this.rtnBtn.Size = new System.Drawing.Size(140, 30);
-            this.rtnBtn.TabIndex = 6;
-            this.rtnBtn.Text = "Return";
-            this.rtnBtn.UseVisualStyleBackColor = true;
-            this.rtnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
-            // 
             // createBtn
             // 
             this.createBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.createBtn.Location = new System.Drawing.Point(12, 176);
             this.createBtn.Name = "createBtn";
-            this.createBtn.Size = new System.Drawing.Size(140, 30);
+            this.createBtn.Size = new System.Drawing.Size(303, 30);
             this.createBtn.TabIndex = 7;
             this.createBtn.Text = "Create files";
             this.createBtn.UseVisualStyleBackColor = true;
@@ -138,7 +126,6 @@ namespace CivilReportApplication
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.createBtn);
-            this.Controls.Add(this.rtnBtn);
             this.Controls.Add(this.chkListBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -161,7 +148,6 @@ namespace CivilReportApplication
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.CheckedListBox chkListBox1;
-        private System.Windows.Forms.Button rtnBtn;
         private System.Windows.Forms.Button createBtn;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;

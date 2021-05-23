@@ -9,11 +9,15 @@
 
     using CivilReportApplication.DtoExportModels;
     using Microsoft.Office.Interop.Excel;
+    using System.Collections.Generic;
+    using CivilReportApplication.DtoImportModels;
 
     public class ExcelWriter
     {
         private readonly string outputDirectory;
         private int lastRow;
+        private int sheetNum;
+
 
         //excel objects
         private Excel.Application app;
@@ -27,6 +31,7 @@
         {
             this.outputDirectory = outputDirectory;
             this.lastRow = 0;
+            this.sheetNum = 1;
         }
 
         public void CreateWorkbook()
@@ -39,7 +44,7 @@
             CreateWorksheet();
         }
 
-        public void AddHeading(string heading,int endColm)
+        public void AddHeading(string heading, int endColm)
         {
             var endHeading = $"{((ColmName)endColm).ToString()}2";
             var range = this.xlWorkSheet.Range["A2", endHeading];
@@ -53,8 +58,53 @@
 
         }
 
+
+        public void AddColmNames(List<PointFromCrossSection> codes, int row)
+        {
+            var range = this.xlWorkSheet.Range[$"A{row}", $"A{row + 1}"];
+            range.Merge();
+            FormatHeading2(range);
+            range.Value = "КМ";
+            var colmNum = 2;
+
+            foreach (var code in codes)
+            {
+                var name = code.Name;
+                int allColm = code.CountDataExport();
+                var endColm = colmNum + allColm - 1;
+                var startHeading = $"{((ColmName)colmNum).ToString()}{row}";
+                var endHeading = $"{((ColmName)endColm).ToString()}{row}";
+                var currentRange = this.xlWorkSheet.Range[startHeading, endHeading];
+                currentRange.Merge();
+                FormatHeading2(currentRange);
+                currentRange.Value = code.Name;
+                var list = code.ExportCodes();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    FormatHeading2(row + 1, colmNum);
+                    this.xlWorkSheet.Cells[row + 1, colmNum] = list[i];
+                    colmNum++;
+                }
+
+            }
+
+        }
+
+        private void FormatHeading2(Range range)
+        {
+            
+            range.HorizontalAlignment = 3;
+            range.VerticalAlignment = 3;
+            range.Font.Name = "Arial Narrow";
+            range.Font.Size = 11;
+            range.Font.Bold = true;
+            range.BorderAround(Excel.XlLineStyle.xlContinuous);
+            
+        }
+
         private void FormatHeading2(int row, int colm)
         {
+            
             var cell = this.xlWorkSheet.Cells[row, colm];
             cell.HorizontalAlignment = 3;
             cell.VerticalAlignment = 3;
@@ -62,22 +112,25 @@
             cell.Font.Size = 11;
             cell.Font.Bold = true;
             cell.BorderAround(Excel.XlLineStyle.xlContinuous);
+            
         }
 
-        private void FormatStationCell(int row,int colm)
+
+        private void FormatStationCell(int row, int colm)
         {
             var cell = this.xlWorkSheet.Cells[row, colm];
             cell.NumberFormat = "0+000.00";
         }
         private void FormatCellTable(int row, int colm)
         {
+            
             var cell = this.xlWorkSheet.Cells[row, colm];
             cell.HorizontalAlignment = 3;
             cell.VerticalAlignment = 3;
             cell.Font.Name = "Arial Narrow";
             cell.Font.Size = 10;
             cell.BorderAround(Excel.XlLineStyle.xlContinuous);
-
+            
         }
 
         public void AddRow(string[] array, int rowNum)
@@ -107,16 +160,16 @@
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
-                    if (property.Name.Contains("Station"))
-                    {
-                        FormatStationCell(rowNum, colmNum);
-                    }
-                    FormatCellTable(rowNum, colmNum);
+                    //if (property.Name.Contains("Station"))
+                    //{
+                    //    FormatStationCell(rowNum, colmNum);
+                    //}
+                    //FormatCellTable(rowNum, colmNum);
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
                     //CreateCellBorder(rowNum, colmNum);
                     continue;
                 }
-                FormatCellTable(rowNum, colmNum);
+              //  FormatCellTable(rowNum, colmNum);
                 xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
                 // CreateCellBorder(rowNum, colmNum);
             }
@@ -138,16 +191,16 @@
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
-                    if (property.Name.Contains("Station"))
-                    {
-                        FormatStationCell(rowNum, colmNum);
-                    }
-                    FormatCellTable(rowNum, colmNum);
+                    //if (property.Name.Contains("Station"))
+                    //{
+                    //    FormatStationCell(rowNum, colmNum);
+                    //}
+                    //FormatCellTable(rowNum, colmNum);
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
                     //CreateCellBorder(rowNum, colmNum);
                     continue;
                 }
-                FormatCellTable(rowNum, colmNum);
+               // FormatCellTable(rowNum, colmNum);
                 xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
                 // CreateCellBorder(rowNum, colmNum);
             }
@@ -155,7 +208,7 @@
 
         }
 
-        public void AddRow(SurfaceProfileReportDto report,int rowNum)
+        public void AddRow(SurfaceProfileReportDto report, int rowNum)
         {
             var allProperties = report.GetType().GetProperties();
             foreach (var property in allProperties)
@@ -170,21 +223,21 @@
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
-                    if (property.Name.Contains("Station"))
-                    {
-                        FormatStationCell(rowNum, colmNum);
-                    }
-                    FormatCellTable(rowNum, colmNum);
+                    //if (property.Name.Contains("Station"))
+                    //{
+                    //    FormatStationCell(rowNum, colmNum);
+                    //}
+                    //FormatCellTable(rowNum, colmNum);
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
                     continue;
                 }
-                FormatCellTable(rowNum, colmNum);
+              //  FormatCellTable(rowNum, colmNum);
                 xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
 
             }
 
             var diff = report.Difference();
-            if (diff!=null)
+            if (diff != null)
             {
                 var wrtiteValue = ((double)diff).ToString("f0");
 
@@ -197,7 +250,54 @@
                 xlWorkSheet.Cells[rowNum, 6] = diff.ToString();
             }
 
-            
+
+        }
+
+        public void AddRow(string fileName, int rowNum)
+        {
+            var file = StaticMethods.ReadTmpFile(fileName);
+            int colm = 1;
+            xlWorkSheet.Cells[rowNum, colm] = fileName;
+          //  FormatCellTable(rowNum, colm);
+            colm++;
+            ;
+
+            foreach (var lines in file)
+            {
+                foreach (var item in lines)
+                {
+                    xlWorkSheet.Cells[rowNum, colm] = item;
+                    //FormatCellTable(rowNum, colm);
+                    ;
+                    colm++;
+                }
+            }
+        }
+
+        public void FormatTable(int startRow,int endRow,int startColm,int endColm)
+        {
+            string startRange = $"{((ColmName)startColm).ToString()}{startRow}";
+            string endRange = $"{((ColmName)endColm).ToString()}{endRow}";
+
+            var range = xlWorkSheet.Range[startRange, endRange];
+
+
+            range.HorizontalAlignment = 3;
+            range.VerticalAlignment = 3;
+            range.Font.Name = "Arial Narrow";
+            range.Font.Size = 10;
+            //  range.Font.Bold = true;
+            range.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+            range.Borders.Weight = Excel.XlBorderWeight.xlThin;
+            //range.Borders.
+            FormatWidthColm(endColm);
+        }
+
+        public void FormatStationColm(int startRow,int endRow, int colm)
+        {
+            var getColm = ((ColmName)colm).ToString();
+            var range = xlWorkSheet.Range[$"{getColm}{startRow}", $"{getColm}{endRow}"];
+            range.NumberFormat = "0+000.00";
         }
 
         public void AddHeader(string[] text)
@@ -252,7 +352,8 @@
         private void CreateWorksheet()
         {
 
-            this.xlWorkSheet = (Excel.Worksheet)workbook.Worksheets.get_Item(1);
+            this.xlWorkSheet = (Excel.Worksheet)workbook.Worksheets.get_Item(sheetNum);
+            sheetNum++;
         }
 
 
@@ -263,6 +364,7 @@
             Marshal.ReleaseComObject(workbook);
             Marshal.ReleaseComObject(app);
         }
+
     }
 
 }

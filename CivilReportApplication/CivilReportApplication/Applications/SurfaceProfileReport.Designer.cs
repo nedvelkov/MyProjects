@@ -32,7 +32,6 @@ namespace CivilReportApplication
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SurfaceProfileReport));
             this.saveLocation = new System.Windows.Forms.Button();
             this.createBtn = new System.Windows.Forms.Button();
-            this.ReturnBtn = new System.Windows.Forms.Button();
             this.loadHtml = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -57,23 +56,14 @@ namespace CivilReportApplication
             // 
             // createBtn
             // 
+            this.createBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.createBtn.Location = new System.Drawing.Point(12, 176);
             this.createBtn.Name = "createBtn";
-            this.createBtn.Size = new System.Drawing.Size(140, 30);
+            this.createBtn.Size = new System.Drawing.Size(303, 30);
             this.createBtn.TabIndex = 2;
             this.createBtn.Text = "Create";
             this.createBtn.UseVisualStyleBackColor = true;
             this.createBtn.Click += new System.EventHandler(this.createBtn_Click);
-            // 
-            // ReturnBtn
-            // 
-            this.ReturnBtn.Location = new System.Drawing.Point(176, 176);
-            this.ReturnBtn.Name = "ReturnBtn";
-            this.ReturnBtn.Size = new System.Drawing.Size(140, 30);
-            this.ReturnBtn.TabIndex = 3;
-            this.ReturnBtn.Text = "Return";
-            this.ReturnBtn.UseVisualStyleBackColor = true;
-            this.ReturnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // loadHtml
             // 
@@ -87,6 +77,7 @@ namespace CivilReportApplication
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(176, 12);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(140, 20);
@@ -94,6 +85,7 @@ namespace CivilReportApplication
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(176, 54);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(140, 20);
@@ -101,6 +93,7 @@ namespace CivilReportApplication
             // 
             // textBox3
             // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(175, 90);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -109,6 +102,7 @@ namespace CivilReportApplication
             // 
             // textBox4
             // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(175, 120);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
@@ -155,12 +149,14 @@ namespace CivilReportApplication
             // 
             // progressBar1
             // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(15, 223);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(300, 23);
             this.progressBar1.TabIndex = 13;
             // 
-            // Form1
+            // SurfaceProfileReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -175,11 +171,12 @@ namespace CivilReportApplication
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.loadHtml);
-            this.Controls.Add(this.ReturnBtn);
             this.Controls.Add(this.createBtn);
             this.Controls.Add(this.saveLocation);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.MaximumSize = new System.Drawing.Size(800, 300);
+            this.MinimumSize = new System.Drawing.Size(350, 300);
+            this.Name = "SurfaceProfileReport";
             this.Text = "Surface profile report";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -189,7 +186,6 @@ namespace CivilReportApplication
         #endregion
         private System.Windows.Forms.Button saveLocation;
         private System.Windows.Forms.Button createBtn;
-        private System.Windows.Forms.Button ReturnBtn;
         private System.Windows.Forms.Button loadHtml;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;

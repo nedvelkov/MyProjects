@@ -30,7 +30,6 @@ namespace CivilReportApplication
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formHtml));
-            this.rtnBtn = new System.Windows.Forms.Button();
             this.loadHtml = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.saveBtn = new System.Windows.Forms.Button();
@@ -40,17 +39,6 @@ namespace CivilReportApplication
             this.prBar1 = new System.Windows.Forms.ProgressBar();
             this.crtBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // rtnBtn
-            // 
-            this.rtnBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtnBtn.Location = new System.Drawing.Point(172, 156);
-            this.rtnBtn.Name = "rtnBtn";
-            this.rtnBtn.Size = new System.Drawing.Size(140, 30);
-            this.rtnBtn.TabIndex = 0;
-            this.rtnBtn.Text = "Return";
-            this.rtnBtn.UseVisualStyleBackColor = true;
-            this.rtnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
             // loadHtml
             // 
@@ -125,7 +113,7 @@ namespace CivilReportApplication
             | System.Windows.Forms.AnchorStyles.Right)));
             this.crtBtn.Location = new System.Drawing.Point(12, 156);
             this.crtBtn.Name = "crtBtn";
-            this.crtBtn.Size = new System.Drawing.Size(140, 30);
+            this.crtBtn.Size = new System.Drawing.Size(300, 30);
             this.crtBtn.TabIndex = 9;
             this.crtBtn.Text = "Create file";
             this.crtBtn.UseVisualStyleBackColor = true;
@@ -144,7 +132,6 @@ namespace CivilReportApplication
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.loadHtml);
-            this.Controls.Add(this.rtnBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(700, 300);
             this.MinimumSize = new System.Drawing.Size(350, 300);
@@ -157,8 +144,6 @@ namespace CivilReportApplication
         }
 
         #endregion
-
-        private System.Windows.Forms.Button rtnBtn;
         private System.Windows.Forms.Button loadHtml;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button saveBtn;

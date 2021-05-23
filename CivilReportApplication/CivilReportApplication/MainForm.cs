@@ -110,7 +110,7 @@ namespace CivilReportApplication
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            using (Form1 form=new Form1())
+            using (CrossSectionReport form=new CrossSectionReport())
             {
                 form.ShowDialog();
             }

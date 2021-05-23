@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using CivilReportApplication;
 using CivilReportApplication.DtoExportModels;
+using CivilReportApplication.DtoImportModels;
 
 namespace CivilReportApplication.Models
 {
@@ -32,6 +33,16 @@ namespace CivilReportApplication.Models
 
             return this.allRows.Count;
         }
+        public int TotalRows(bool crossSection = true)
+        {
+            if (IsInitilize())
+            {
+                this.document = new HtmlDocument();
+                this.document.Load(this.filePath);
+            }
+            var nodes = document.DocumentNode.SelectNodes("//tbody").Skip(1).ToList();
+            return nodes.Count;
+        }
 
         private bool IsInitilize()
         {
@@ -53,6 +64,7 @@ namespace CivilReportApplication.Models
             this.document = new HtmlDocument();
             this.document.Load(this.filePath);
             var nodes = document.DocumentNode.SelectNodes("//tbody").ToList();
+            ;
             var table = nodes.Skip(1).First();
             this.innerHtml = new HtmlDocument();
             innerHtml.LoadHtml(table.InnerHtml);
@@ -124,6 +136,102 @@ namespace CivilReportApplication.Models
             return $"{station} {elevation}";
         }
 
+        public string ReadRow(int index, List<PointFromCrossSection> codes)
+        {
+            var nodes = document.DocumentNode.SelectNodes("//tbody").Skip(1).ToList();
+
+            var station = nodes[index];
+            var currentTable = new HtmlDocument();
+            currentTable.LoadHtml(station.InnerHtml);
+            ;
+            var rows = currentTable.DocumentNode.SelectNodes("//tr").ToList();
+            var allCodes = Data(rows[0].InnerHtml);
+            int countCodes = allCodes.Length;
+            var offsets = Data(rows[1].InnerHtml);
+            var elevations = Data(rows[2].InnerHtml);
+            var slopes = Data(rows[3].InnerHtml);
+            var allEating = Data(rows[4].InnerHtml);
+            var allNorthing = Data(rows[5].InnerHtml);
+
+            var sb = new StringBuilder();
+
+            int indexCode = 0;
+
+            for (int i = 0; i < countCodes; i++)
+            {
+                var code = allCodes[i];
+                var offsetAsString = offsets[i];
+                double offset;
+               if( double.TryParse(offsetAsString.Replace("m", ""), out offset) == false)
+                {
+                    continue;
+                }
+                var point = new PointFromCrossSection();
+                point.Code = code;
+                point.SetSide(offset);
+                var tmp = codes.FirstOrDefault(a => a.Equals(point) == true);
+                if (tmp == null) continue;
+                var tmpIndex = codes.IndexOf(tmp);
+                if (tmpIndex == indexCode)
+                {
+                    indexCode++;
+                Queue<string> dataPoint = new Queue<string>();
+               // dataPoint.Enqueue(tmp.Code);
+                if (tmp.Northing)
+                {
+                    var nort = double.Parse(allNorthing[i].Replace(",", ""));
+                    dataPoint.Enqueue(nort.ToString("f4"));
+                }
+                if (tmp.Easting)
+                {
+                    var east = double.Parse(allEating[i].Replace(",", ""));
+                    dataPoint.Enqueue(east.ToString("f4"));
+                }
+                if (tmp.Elevation)
+                {
+                    var eleavtion = double.Parse(elevations[i].Replace("m", ""));
+                    dataPoint.Enqueue(eleavtion.ToString("f3"));
+                }
+                if (tmp.Offset)
+                {
+                    dataPoint.Enqueue(offset.ToString("f3"));
+                }
+                if(tmp.Slope && tmp.Side!= "Centre line")
+                {
+                    dataPoint.Enqueue(slopes[i]);
+                }
+                sb.AppendLine(string.Join(",", dataPoint));
+                }
+                else
+                {
+                    var codeAtIndex = codes[indexCode];
+                    var nullValues = codeAtIndex.CountDataExport();
+                    Queue<string> dataPoint = new Queue<string>();
+                    for (int d = 0; d < nullValues; d++)
+                    {
+                        dataPoint.Enqueue(" ");
+                    }
+                    sb.AppendLine(string.Join(",", dataPoint));
+                    indexCode++;
+                    i--;
+                }
+                
+            }
+
+
+
+            return sb.ToString().TrimEnd();
+        }
+
+        public string Station(int index)
+        {
+            var nodesCentre = document.DocumentNode.SelectNodes("//center").ToList().Where((c, i) => i % 2 != 0).Select(x => x.InnerText).ToList();
+            var totalStation = nodesCentre[index];
+            var station = totalStation.Split(' ');
+
+            return station[1].Replace("+","").TrimEnd();
+        }
+
         public Dictionary<string, int> PointCodesLayout()
         {
             ReadHtml();
@@ -145,7 +253,7 @@ namespace CivilReportApplication.Models
 
         }
 
-        public Dictionary<PointReport, int> PointCodesReport()
+        public List<PointFromCrossSection> PointCodesReport()
         {
             ReadHtml();
             var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
@@ -157,22 +265,27 @@ namespace CivilReportApplication.Models
             offesetRow.LoadHtml(temp2);
 
             var allCodes = codeRow.DocumentNode.SelectNodes("//td").Select(x => x.InnerText).ToList();
-            var allOffset = offesetRow.DocumentNode.SelectNodes("//td").Select(x =>x.InnerText).ToList();
+            var allOffset = offesetRow.DocumentNode.SelectNodes("//td").Select(x => x.InnerText).ToList();
 
-            var result = new Dictionary<PointReport, int>();
+            var result = new List<PointFromCrossSection>();
             for (int i = 1; i < allCodes.Count; i++)
             {
                 if (allCodes[i] == "&nbsp;") continue;
-                PointReport point = new PointReport();
+                PointFromCrossSection point = new PointFromCrossSection();
                 point.Code = allCodes[i];
-                point.Offset = double.Parse(allOffset[i].Replace("m",""));
-                
-                result.Add(point, i);
+
+                var offset = double.Parse(allOffset[i].Replace("m", ""));
+
+                string side;
+
+                point.SetSide(offset);
+
+                result.Add(point);
 
             }
 
             return result;
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
 

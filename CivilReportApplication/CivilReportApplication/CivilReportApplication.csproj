@@ -65,6 +65,7 @@
     <Compile Include="DtoExportModels\PointReport.cs" />
     <Compile Include="DtoExportModels\ProfileReportDto.cs" />
     <Compile Include="DtoExportModels\SurfaceProfileReportDto.cs" />
+    <Compile Include="DtoImportModels\PointFromCrossSection.cs" />
     <Compile Include="DtoImportModels\ProfileGeometryDto.cs" />
     <Compile Include="Applications\SurfaceProfileReport.cs">
       <SubType>Form</SubType>
@@ -72,11 +73,23 @@
     <Compile Include="Applications\SurfaceProfileReport.Designer.cs">
       <DependentUpon>SurfaceProfileReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Applications\CrossSectionReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Applications\CrossSectionReport.Designer.cs">
+      <DependentUpon>CrossSectionReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\CodesInCrossSection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\CodesInCrossSection.Designer.cs">
+      <DependentUpon>CodesInCrossSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\AddCodeToCrossSection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\AddCodeToCrossSection.Designer.cs">
+      <DependentUpon>AddCodeToCrossSection.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DataContainer.cs" />
     <Compile Include="DtoExportModels\AlignmentReportDto.cs" />
@@ -142,8 +155,14 @@
     <EmbeddedResource Include="Applications\SurfaceProfileReport.resx">
       <DependentUpon>SurfaceProfileReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Applications\CrossSectionReport.resx">
+      <DependentUpon>CrossSectionReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\CodesInCrossSection.resx">
+      <DependentUpon>CodesInCrossSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\AddCodeToCrossSection.resx">
+      <DependentUpon>AddCodeToCrossSection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -170,6 +189,7 @@
       <DependentUpon>SelectHtmlForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CivilReportApplication.DtoImportModels.PointFromCrossSection.datasource" />
     <None Include="Properties\DataSources\CivilReportApplication.DtoImportModels.ProfileGeometryDto.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -65,6 +65,12 @@ namespace CivilReportApplication
                 return;
             }
 
+            if (string.IsNullOrEmpty(outputDirectory))
+            {
+                var temp = filePath.LastIndexOf("\\");
+                var directory = string.Concat(filePath.Take(temp));
+                outputDirectory = directory;
+            }
             var writer = new ExcelWriter(outputDirectory);
             writer.CreateWorkbook();
             var headingsColum = new string[] { "Nо", "Тип", "Начален км", "Краен км", "Дължина", "Радиус", "А", "Полигонов ъгъл", "Начална точка", "Крайна точка" };
@@ -80,12 +86,6 @@ namespace CivilReportApplication
                 this.progressBar1.Value = progress + 1 + i;
             }
 
-            if (string.IsNullOrEmpty(outputDirectory))
-            {
-                var temp = filePath.LastIndexOf("\\");
-                var directory = string.Concat(filePath.Take(temp));
-                outputDirectory = directory;
-            }
             if (string.IsNullOrEmpty(this.textBox3.Text) == false)
             {
                 this.reportName = textBox3.Text;
@@ -100,7 +100,25 @@ namespace CivilReportApplication
             {
                 writer.AddFooter(reportName);
             }
+            int starRow =5;
+            int endRow = 5 + countInfo - 1;
+            int startColm=1;
+            int endColm=10;
+            writer.FormatTable(starRow, endRow, startColm, endColm);
+            writer.FormatStationColm(starRow, endRow, 3);
+            writer.FormatStationColm(starRow, endRow, 4);
             writer.CreateFile(outputDirectory,"sit" ,reportName);
+
+
+            DialogResult res = MessageBox.Show("Report created. Do you want to open report", "Sucsseful", MessageBoxButtons.YesNo);
+
+
+            if (res == DialogResult.Yes)
+            {
+
+                System.Diagnostics.Process.Start($"{outputDirectory}\\sit_{reportName}.xls");
+
+            }
 
         }
 
