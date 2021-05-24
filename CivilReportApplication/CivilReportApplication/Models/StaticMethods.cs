@@ -28,6 +28,16 @@ namespace CivilReportApplication.Models
                 stream.Write(text);
             }
         }
+        public static void WriteScrFile(string outputDirectory, string outputName, StringBuilder sb)
+        {
+            var direkctoryLayout = $"{outputDirectory}\\{outputName}.scr";
+
+            var text = sb.ToString();
+            using (var stream = new StreamWriter(direkctoryLayout))
+            {
+                stream.Write(text);
+            }
+        }
 
         public static void CreateTmpFolder()
         {

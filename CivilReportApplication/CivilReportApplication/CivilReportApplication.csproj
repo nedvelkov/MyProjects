@@ -65,6 +65,8 @@
     <Compile Include="DtoExportModels\PointReport.cs" />
     <Compile Include="DtoExportModels\ProfileReportDto.cs" />
     <Compile Include="DtoExportModels\SurfaceProfileReportDto.cs" />
+    <Compile Include="DtoImportModels\ImportDataTab8.cs" />
+    <Compile Include="DtoImportModels\PointFor3DPolyline.cs" />
     <Compile Include="DtoImportModels\PointFromCrossSection.cs" />
     <Compile Include="DtoImportModels\ProfileGeometryDto.cs" />
     <Compile Include="Applications\SurfaceProfileReport.cs">
@@ -90,6 +92,18 @@
     </Compile>
     <Compile Include="Applications\AddCodeToCrossSection.Designer.cs">
       <DependentUpon>AddCodeToCrossSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\3DPolylineCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\3DPolylineCreate.Designer.cs">
+      <DependentUpon>3DPolylineCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\SelectRange3DPolyline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\SelectRange3DPolyline.Designer.cs">
+      <DependentUpon>SelectRange3DPolyline.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DataContainer.cs" />
     <Compile Include="DtoExportModels\AlignmentReportDto.cs" />
@@ -133,6 +147,7 @@
     </Compile>
     <Compile Include="Models\ExcelWriter.cs" />
     <Compile Include="Models\HtmlReader.cs" />
+    <Compile Include="Models\ReaderRenaFiles.cs" />
     <Compile Include="Models\StaticMethods.cs" />
     <Compile Include="Models\XmlReader.cs" />
     <Compile Include="Program.cs" />
@@ -163,6 +178,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\AddCodeToCrossSection.resx">
       <DependentUpon>AddCodeToCrossSection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\3DPolylineCreate.resx">
+      <DependentUpon>3DPolylineCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\SelectRange3DPolyline.resx">
+      <DependentUpon>SelectRange3DPolyline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

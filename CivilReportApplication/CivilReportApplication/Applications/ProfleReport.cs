@@ -89,12 +89,12 @@ namespace CivilReportApplication
 
             if (string.IsNullOrEmpty(this.outputDirectory))
             {
-                MessageBox.Show("Select directory for report");
+                MessageBox.Show("Select directory for report","Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrEmpty(textBox2.Text))
             {
-                MessageBox.Show("Enter alignment name");
+                MessageBox.Show("Enter alignment name", "Warining", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             var writer = new ExcelWriter(this.outputDirectory);

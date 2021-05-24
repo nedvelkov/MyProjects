@@ -116,5 +116,15 @@ namespace CivilReportApplication
             }
             this.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (Form1 form = new Form1())
+            {
+                form.ShowDialog();
+            }
+            this.Show();
+        }
     }
 }
