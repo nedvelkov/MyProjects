@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.DtoExportModels
+﻿namespace CivilReportApplication.DtoExportModels
 {
    public class PointReport
     {
@@ -15,19 +9,6 @@ namespace CivilReportApplication.DtoExportModels
         public double Easting { get; set; }
         public double Northing { get; set; }
 
-        public string Side()
-        {
-            if (this.Offset>0)
-            {
-                return "Right";
-            }else if (this.Offset < 0)
-            {
-                return "Left";
-            }
-            else
-            {
-                return "Centre line";
-            }
-        }
+        public string Side() => this.Offset > 0 ? "Right" : this.Offset < 0 ? "Left" : "Centre line";
     }
 }

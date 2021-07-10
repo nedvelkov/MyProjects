@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.DtoImportModels
+﻿namespace CivilReportApplication.DtoImportModels
 {
+
+    using System;
+    using System.Collections.Generic;
+
     public class PointFromCrossSection
     {
         public Boolean Export { get; set; }
@@ -18,21 +16,7 @@ namespace CivilReportApplication.DtoImportModels
         public Boolean Northing { get; set; }
         public Boolean Slope { get; set; }
 
-        public void SetSide(double offset)
-        {
-            if (offset < 0)
-            {
-                this.Side = "Left";
-            }
-            else if (offset > 0)
-            {
-                this.Side = "Right";
-            }
-            else
-            {
-                this.Side = "Centre line";
-            }
-        }
+        public void SetSide(double offset) => this.Side = offset < 0 ? "Left" : offset > 0 ? "Right" : "Centre line";
 
         public override bool Equals(object obj)
         {
@@ -40,10 +24,7 @@ namespace CivilReportApplication.DtoImportModels
 
             if (p == null) return false;
 
-            bool result = this.Code == p.Code && this.Side == p.Side;
-            ;
-
-            return result;
+            return this.Code == p.Code && this.Side == p.Side;
 
         }
 

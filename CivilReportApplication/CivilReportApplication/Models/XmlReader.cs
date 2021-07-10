@@ -50,11 +50,14 @@ using CivilReportApplication.DtoExportModels;
                .Attribute("angularUnit")
                .Value;
 
-            this.reportName = allAlignments
-                .First().Attribute("name").Value;
+            this.reportName = allAlignments.First()
+                                            .Attribute("name")
+                                            .Value;
 
-            this.startStation =double.Parse( allAlignments
-                .First().Attribute("staStart").Value);
+            this.startStation =double.Parse(allAlignments
+                                            .First()
+                                            .Attribute("staStart")
+                                            .Value);
 
             this.reportList = allAlignments
                 .First()
@@ -88,7 +91,12 @@ using CivilReportApplication.DtoExportModels;
         {
             var row = this.reportList[index];
             var element = row.Name.LocalName;
-            var length = double.Parse(row.Attributes().ToList().First(x => x.Name == "length").Value);
+            var length = double.Parse(row
+                                        .Attributes()
+                                        .ToList()
+                                        .First(x => x.Name == "length")
+                                        .Value);
+
             var exportDto = new AlignmentReportDto
             {
                 Id = index + 1,
@@ -97,8 +105,18 @@ using CivilReportApplication.DtoExportModels;
             };
             if (element == "Curve")
             {
-               var radius = double.Parse(row.Attributes().ToList().First(x => x.Name == "radius").Value);
-                var alfa = double.Parse(row.Attributes().ToList().First(x => x.Name == "delta").Value);
+               var radius = double.Parse(row
+                                            .Attributes()
+                                            .ToList()
+                                            .First(x => x.Name == "radius")
+                                            .Value);
+
+                var alfa = double.Parse(row
+                                            .Attributes()
+                                            .ToList()
+                                            .First(x => x.Name == "delta")
+                                            .Value);
+
                 double angleBeta;
                 if (this.units == "decimal degrees")
                 {
@@ -110,8 +128,16 @@ using CivilReportApplication.DtoExportModels;
             }
             if (element == "Spiral")
             {
-                var startSpiral = row.Attributes().ToList().First(x => x.Name == "radiusStart").Value;
-                var endSpiral = row.Attributes().ToList().First(a => a.Name == "radiusEnd").Value;
+                var startSpiral = row.Attributes()
+                                     .ToList()
+                                     .First(x => x.Name == "radiusStart")
+                                     .Value;
+
+                var endSpiral = row.Attributes()
+                                   .ToList()
+                                   .First(a => a.Name == "radiusEnd")
+                                   .Value;
+               
                 double radiusSpiral;
                 double.TryParse(startSpiral, out radiusSpiral);
                 double.TryParse(endSpiral, out radiusSpiral);
@@ -150,8 +176,6 @@ using CivilReportApplication.DtoExportModels;
                 }
                 
             }
-
-
             return exportDto;
         }
     }

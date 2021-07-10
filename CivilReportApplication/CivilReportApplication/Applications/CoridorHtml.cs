@@ -1,16 +1,13 @@
-﻿using CivilReportApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.Models;
+
     public partial class CoridorHtml : Form
     {
         private string filePath;
@@ -39,7 +36,7 @@ namespace CivilReportApplication
             }
 
             this.reader = new HtmlReader(filePath);
-            this.codes= reader.PointCodesLayout();
+            this.codes = reader.PointCodesLayout();
 
             foreach (var code in codes)
             {
@@ -57,7 +54,7 @@ namespace CivilReportApplication
 
             textBox2.Text = outputDirectory;
         }
-        
+
         private void ReturnBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -69,14 +66,14 @@ namespace CivilReportApplication
         {
 
             var points = this.chkListBox1.CheckedItems;
-            if (points.Count==0) 
+            if (points.Count == 0)
             {
                 MessageBox.Show("Chose point/points");
                 return;
             }
             reader.ReadHtml();
             var allRows = reader.TotalRows();
-            this.progressBar1.Maximum = (allRows-2) * points.Count;
+            this.progressBar1.Maximum = (allRows - 2) * points.Count;
             this.progressBar1.Step = 1;
             int progress = 0;
             this.progressBar1.Value = progress;
@@ -98,7 +95,7 @@ namespace CivilReportApplication
                     outputDirectory = directory;
                 }
 
-                StaticMethods.WriteTxtFile(outputDirectory,code+"_niv", sb);
+                StaticMethods.WriteTxtFile(outputDirectory, code + "_niv", sb);
             }
 
         }

@@ -1,17 +1,13 @@
-﻿using CivilReportApplication.DtoExportModels;
-using CivilReportApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoExportModels;
+    using CivilReportApplication.Models;
+
     public partial class SurfaceProfileReport : Form
     {
         public SurfaceProfileReport()
@@ -77,8 +73,6 @@ namespace CivilReportApplication
                 this.progressBar1.Value = i + 1;
             }
 
-
-
             var writer = new ExcelWriter(outputDirectory);
             writer.CreateWorkbook();
             var headingsColum = new string[] { "КМ", "X", "Y", "Кота терен", "Кота нивлета", "Рабона разлика", "Точка" };
@@ -124,7 +118,6 @@ namespace CivilReportApplication
             writer.FormatStationColm(starRow, endRow, 1);
 
             writer.CreateFile(outputDirectory, "ter", reportName);
-            ;
 
             DialogResult res = MessageBox.Show("Report created. Do you want to open report", "Sucsseful", MessageBoxButtons.YesNo);
 

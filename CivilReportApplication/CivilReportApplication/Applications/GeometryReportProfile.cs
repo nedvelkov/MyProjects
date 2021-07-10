@@ -1,16 +1,11 @@
-﻿using CivilReportApplication.DtoImportModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoImportModels;
+
     public partial class GeometryReportProfile : Form
     {
         public List<ProfileGeometryDto> ProfileGeometry { get; set; }
@@ -41,7 +36,6 @@ namespace CivilReportApplication
         {
 
         }
-
 
         private void AddReportInfo()
         {

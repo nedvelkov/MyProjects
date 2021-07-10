@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CivilReportApplication.Models;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.Models;
+
+
     public partial class formHtml : Form
     {
         private string filePath;
@@ -57,12 +54,12 @@ namespace CivilReportApplication
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            
+
             var reader = new HtmlReader(filePath);
 
             reader.ReadHtml();
 
-            this.prBar1.Maximum=reader.TotalRows();
+            this.prBar1.Maximum = reader.TotalRows();
 
             if (string.IsNullOrEmpty(textBox3.Text))
             {
@@ -83,12 +80,12 @@ namespace CivilReportApplication
             for (int i = 0; i < prBar1.Maximum; i++)
             {
                 var dataFromRow = reader.ReadRow(i);
-                    this.prBar1.Value = i + 1;
+                this.prBar1.Value = i + 1;
                 if (string.IsNullOrEmpty(dataFromRow)) continue;
 
                 sb.AppendLine(dataFromRow);
             }
-            ;
+
             StaticMethods.WriteTxtFile(outputDirectory, outputName, sb);
         }
 

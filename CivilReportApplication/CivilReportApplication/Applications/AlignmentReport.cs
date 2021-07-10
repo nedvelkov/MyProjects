@@ -1,17 +1,14 @@
-﻿using CivilReportApplication.DtoExportModels;
-using CivilReportApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoExportModels;
+    using CivilReportApplication.Models;
+
     public partial class AlignmentReport : Form
     {
         private string filePath;
@@ -46,13 +43,13 @@ namespace CivilReportApplication
                 reader.ReadFile("CoordGeom");
                 this.reportName = reader.ReportName("CoordGeom");
                 this.countInfo = reader.CountReportInfo();
-                this.progressBar1.Maximum = countInfo*2+1;
+                this.progressBar1.Maximum = countInfo * 2 + 1;
                 this.progressBar1.Step = 1;
                 this.progressBar1.Value = 0;
                 this.exportDto = new List<AlignmentReportDto>();
                 for (int i = 0; i < countInfo; i++)
                 {
-                   var dto= reader.ReadRow(i);
+                    var dto = reader.ReadRow(i);
                     this.exportDto.Add(dto);
                     progressBar1.Value = i + 1;
                 }
@@ -90,7 +87,7 @@ namespace CivilReportApplication
             {
                 this.reportName = textBox3.Text;
             }
-            writer.AddHeading($"Данни за ситуация за {reportName}",10);
+            writer.AddHeading($"Данни за ситуация за {reportName}", 10);
             if (checkBox1.Checked)
             {
                 writer.AddHeader(this.txtBox4.Lines);
@@ -100,14 +97,14 @@ namespace CivilReportApplication
             {
                 writer.AddFooter(reportName);
             }
-            int starRow =5;
+            int starRow = 5;
             int endRow = 5 + countInfo - 1;
-            int startColm=1;
-            int endColm=10;
+            int startColm = 1;
+            int endColm = 10;
             writer.FormatTable(starRow, endRow, startColm, endColm);
             writer.FormatStationColm(starRow, endRow, 3);
             writer.FormatStationColm(starRow, endRow, 4);
-            writer.CreateFile(outputDirectory,"sit" ,reportName);
+            writer.CreateFile(outputDirectory, "sit", reportName);
 
 
             DialogResult res = MessageBox.Show("Report created. Do you want to open report", "Sucsseful", MessageBoxButtons.YesNo);
@@ -115,9 +112,7 @@ namespace CivilReportApplication
 
             if (res == DialogResult.Yes)
             {
-
                 System.Diagnostics.Process.Start($"{outputDirectory}\\sit_{reportName}.xls");
-
             }
 
         }

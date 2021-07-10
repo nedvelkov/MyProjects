@@ -1,17 +1,15 @@
-﻿using CivilReportApplication.DtoImportModels;
-using CivilReportApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoImportModels;
+    using CivilReportApplication.Models;
+
     public partial class Form1 : Form
     {
         private string filePathTab8;
@@ -60,8 +58,6 @@ namespace CivilReportApplication
                 MessageBox.Show("Invalid directory");
                 return;
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -89,8 +85,8 @@ namespace CivilReportApplication
                 }
 
             }
-            ;
-            if (this.points!=null)
+
+            if (this.points != null)
             {
                 roadPoints = reader.RoadPoint(filePathTab5);
 
@@ -157,7 +153,7 @@ namespace CivilReportApplication
                 }
                 sb.AppendLine();
 
-                StaticMethods.WriteScrFile(this.outputDirectory,$"{item}_{textBox4.Text}", sb);
+                StaticMethods.WriteScrFile(this.outputDirectory, $"{item}_{textBox4.Text}", sb);
             }
 
             MessageBox.Show("Script files done", "Sucsseful", MessageBoxButtons.OK);

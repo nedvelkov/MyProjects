@@ -1,16 +1,11 @@
-﻿using CivilReportApplication.DtoImportModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+
+    using System;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoImportModels;
+
     public partial class AddCodeToCrossSection : Form
     {
         public string[] listCodes;
@@ -27,7 +22,7 @@ namespace CivilReportApplication
             int count = checkedListBox1.Items.Count;
             for (int i = 0; i < count; i++)
             {
-                if (i!=index)
+                if (i != index)
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 }
@@ -71,7 +66,7 @@ namespace CivilReportApplication
                 return;
             }
             var selectedItems = checkedListBox2.CheckedItems;
-            
+
             foreach (var item in selectedItems)
             {
                 var prop = item.ToString();
@@ -80,7 +75,7 @@ namespace CivilReportApplication
 
             try
             {
-            InsertBefore();
+                InsertBefore();
             }
             catch (Exception)
             {
@@ -88,7 +83,7 @@ namespace CivilReportApplication
                 MessageBox.Show("Chose position for point");
                 return;
             }
-            
+
             this.Hide();
 
         }
@@ -99,10 +94,11 @@ namespace CivilReportApplication
             {
                 point.Side = radioButton1.Text;
             }
-            else if(radioButton2.Checked)
+            else if (radioButton2.Checked)
             {
                 point.Side = radioButton2.Text;
-            }else if (radioButton3.Checked)
+            }
+            else if (radioButton3.Checked)
             {
                 point.Side = radioButton3.Text;
             }

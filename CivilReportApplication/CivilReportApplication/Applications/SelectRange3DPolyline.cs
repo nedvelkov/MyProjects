@@ -1,16 +1,13 @@
-﻿using CivilReportApplication.DtoImportModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoImportModels;
+
     public partial class SelectRange3DPolyline : Form
     {
         public List<ImportDataTab8> points;
@@ -21,7 +18,7 @@ namespace CivilReportApplication
             try
             {
 
-            GetPoints(tab8, tab5);
+                GetPoints(tab8, tab5);
             }
             catch (Exception)
             {
@@ -75,11 +72,6 @@ namespace CivilReportApplication
                 point.PointNumber = tab5[i][2];
                 points.Add(point);
             }
-
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -93,7 +85,7 @@ namespace CivilReportApplication
                 var startPoint = this.points.First(x => x.PointNumber == textBox1.Text);
                 var endPoint = this.points.First(x => x.PointNumber == textBox2.Text);
                 var startIndex = this.points.IndexOf(startPoint);
-                var endIndex = this.points.IndexOf(endPoint)+1;
+                var endIndex = this.points.IndexOf(endPoint) + 1;
                 this.points = this.points.Skip(startIndex).Take(endIndex - startIndex).ToList();
 
             }
@@ -104,8 +96,8 @@ namespace CivilReportApplication
                 if (ChekRange(textBox3, textBox4, "station")) return;
 
 
-                var startPoint = this.points.First(x => x.Station >= double.Parse( textBox3.Text));
-                var endPoint = this.points.First(x => x.Station <= double.Parse( textBox4.Text));
+                var startPoint = this.points.First(x => x.Station >= double.Parse(textBox3.Text));
+                var endPoint = this.points.First(x => x.Station <= double.Parse(textBox4.Text));
                 var startIndex = this.points.IndexOf(startPoint);
                 var endIndex = this.points.IndexOf(endPoint) + 1;
                 this.points = this.points.Skip(startIndex).Take(endIndex - startIndex).ToList();
@@ -168,7 +160,6 @@ namespace CivilReportApplication
                     break;
             }
 
-            ;
             if (startPoint > endPoint)
             {
                 MessageBox.Show("Start point cannot be greater than end point", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -180,17 +171,12 @@ namespace CivilReportApplication
                 MessageBox.Show("Start point cannot be less than first point", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 box1.Text = points.First().PointNumber;
                 return true;
-
-
             }
-            ;
             if (lastPoint < endPoint)
             {
                 MessageBox.Show("End point cannot be greater than last point", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 box2.Text = points.Last().PointNumber;
                 return true;
-
-
             }
             return false;
         }

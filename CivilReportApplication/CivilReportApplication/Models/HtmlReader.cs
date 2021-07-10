@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HtmlAgilityPack;
-using CivilReportApplication;
-using CivilReportApplication.DtoExportModels;
-using CivilReportApplication.DtoImportModels;
-
-namespace CivilReportApplication.Models
+﻿namespace CivilReportApplication.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using HtmlAgilityPack;
+
+    using CivilReportApplication.DtoImportModels;
+
     public class HtmlReader
     {
         private readonly string filePath;
@@ -40,7 +39,10 @@ namespace CivilReportApplication.Models
                 this.document = new HtmlDocument();
                 this.document.Load(this.filePath);
             }
-            var nodes = document.DocumentNode.SelectNodes("//tbody").Skip(1).ToList();
+            var nodes = document.DocumentNode
+                                .SelectNodes("//tbody")
+                                .Skip(1)
+                                .ToList();
             return nodes.Count;
         }
 
@@ -62,19 +64,32 @@ namespace CivilReportApplication.Models
         {
 
             this.document = new HtmlDocument();
+            
             this.document.Load(this.filePath);
-            var nodes = document.DocumentNode.SelectNodes("//tbody").ToList();
-            ;
+
+            var nodes = document.DocumentNode
+                                .SelectNodes("//tbody")
+                                .ToList();
+
             var table = nodes.Skip(1).First();
+
             this.innerHtml = new HtmlDocument();
+
             innerHtml.LoadHtml(table.InnerHtml);
-            this.allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
+
+            this.allRows = innerHtml.DocumentNode
+                                    .SelectNodes("//tr")
+                                    .ToList();
 
         }
 
         public string LayoutName()
         {
-            var fullTitle = document.DocumentNode.SelectNodes("//hr").First().NextSibling.InnerText;
+            var fullTitle = document.DocumentNode
+                                    .SelectNodes("//hr")
+                                    .First()
+                                    .NextSibling
+                                    .InnerText;
             var startIndex = fullTitle.IndexOf(":");
             var endIndex = fullTitle.IndexOf("\n");
             var title = fullTitle.Substring(startIndex + 2, endIndex - startIndex - 2);
@@ -97,9 +112,9 @@ namespace CivilReportApplication.Models
 
             }
 
-            var station = double.Parse(currentRow[stationIndex].Replace("+", ""));
+            var station = double.Parse(PurgeValue("+", currentRow[stationIndex]));
 
-            double.TryParse(currentRow[designElevation].Replace("m", ""), out double elevation);
+            double.TryParse(PurgeValue("m", currentRow[designElevation]), out double elevation);
 
             return $"{station} {elevation}";
         }
@@ -122,16 +137,15 @@ namespace CivilReportApplication.Models
             return sb.ToString();
         }
 
-
         public string ReadRow(int index, int elevationIndex, int stationIndex = 0)
         {
             var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
 
             var currentRow = Data(allRows[index].InnerHtml);
 
-            var station = double.Parse(currentRow[stationIndex].Replace("+", ""));
+            var station = double.Parse(PurgeValue("+", currentRow[stationIndex]));
 
-            double.TryParse(currentRow[elevationIndex].Replace("m", ""), out double elevation);
+            double.TryParse(PurgeValue("m", currentRow[elevationIndex]), out double elevation);
 
             return $"{station} {elevation}";
         }
@@ -150,7 +164,7 @@ namespace CivilReportApplication.Models
             var offsets = Data(rows[1].InnerHtml);
             var elevations = Data(rows[2].InnerHtml);
             var slopes = Data(rows[3].InnerHtml);
-            var allEating = Data(rows[4].InnerHtml);
+            var allEasting = Data(rows[4].InnerHtml);
             var allNorthing = Data(rows[5].InnerHtml);
 
             var sb = new StringBuilder();
@@ -162,7 +176,7 @@ namespace CivilReportApplication.Models
                 var code = allCodes[i];
                 var offsetAsString = offsets[i];
                 double offset;
-               if( double.TryParse(offsetAsString.Replace("m", ""), out offset) == false)
+               if( double.TryParse(PurgeValue("m",offsetAsString), out offset) == false)
                 {
                     continue;
                 }
@@ -170,37 +184,41 @@ namespace CivilReportApplication.Models
                 point.Code = code;
                 point.SetSide(offset);
                 var tmp = codes.FirstOrDefault(a => a.Equals(point) == true);
-                if (tmp == null) continue;
+
+                if (tmp == null)
+                {
+                    continue;
+                }
                 var tmpIndex = codes.IndexOf(tmp);
                 if (tmpIndex == indexCode)
                 {
                     indexCode++;
-                Queue<string> dataPoint = new Queue<string>();
-               // dataPoint.Enqueue(tmp.Code);
-                if (tmp.Northing)
-                {
-                    var nort = double.Parse(allNorthing[i].Replace(",", ""));
-                    dataPoint.Enqueue(nort.ToString("f4"));
-                }
-                if (tmp.Easting)
-                {
-                    var east = double.Parse(allEating[i].Replace(",", ""));
-                    dataPoint.Enqueue(east.ToString("f4"));
-                }
-                if (tmp.Elevation)
-                {
-                    var eleavtion = double.Parse(elevations[i].Replace("m", ""));
-                    dataPoint.Enqueue(eleavtion.ToString("f3"));
-                }
-                if (tmp.Offset)
-                {
-                    dataPoint.Enqueue(offset.ToString("f3"));
-                }
-                if(tmp.Slope && tmp.Side!= "Centre line")
-                {
-                    dataPoint.Enqueue(slopes[i]);
-                }
-                sb.AppendLine(string.Join(",", dataPoint));
+                    Queue<string> dataPoint = new Queue<string>();
+
+                    if (tmp.Northing)
+                    {
+                        var nort = double.Parse(PurgeValue(",", allNorthing[i]));
+                        dataPoint.Enqueue(nort.ToString("f4"));
+                    }
+                    if (tmp.Easting)
+                    {
+                        var east = double.Parse(PurgeValue(",", allEasting[i]));
+                        dataPoint.Enqueue(east.ToString("f4"));
+                    }
+                    if (tmp.Elevation)
+                    {
+                        var eleavtion = double.Parse(PurgeValue("m", elevations[i]));
+                        dataPoint.Enqueue(eleavtion.ToString("f3"));
+                    }
+                    if (tmp.Offset)
+                    {
+                        dataPoint.Enqueue(offset.ToString("f3"));
+                    }
+                    if(tmp.Slope && tmp.Side!= "Centre line")
+                    {
+                        dataPoint.Enqueue(slopes[i]);
+                    }
+                    sb.AppendLine(string.Join(",", dataPoint));
                 }
                 else
                 {
@@ -217,32 +235,41 @@ namespace CivilReportApplication.Models
                 }
                 
             }
-
-
-
             return sb.ToString().TrimEnd();
         }
 
         public string Station(int index)
         {
-            var nodesCentre = document.DocumentNode.SelectNodes("//center").ToList().Where((c, i) => i % 2 != 0).Select(x => x.InnerText).ToList();
+            var nodesCentre = document.DocumentNode
+                                    .SelectNodes("//center")
+                                    .ToList()
+                                    .Where((c, i) => i % 2 != 0)
+                                    .Select(x => x.InnerText)
+                                    .ToList();
             var totalStation = nodesCentre[index];
             var station = totalStation.Split(' ');
 
             return station[1].Replace("+","").TrimEnd();
         }
-
         public Dictionary<string, int> PointCodesLayout()
         {
             ReadHtml();
-            var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
+            var allRows = innerHtml.DocumentNode
+                                    .SelectNodes("//tr")
+                                    .ToList();
+            
             var temp = allRows[0].InnerHtml;
             var currentRow = new HtmlDocument();
 
             currentRow.LoadHtml(temp);
 
-            var allColms = currentRow.DocumentNode.SelectNodes("//td").Select(x => x.InnerText).ToArray();
+            var allColms = currentRow.DocumentNode
+                                     .SelectNodes("//td")
+                                     .Select(x => x.InnerText)
+                                     .ToArray();
+
             var result = new Dictionary<string, int>();
+            
             for (int i = 0; i < allColms.Length; i++)
             {
                 if (allColms[i] == "&nbsp;") continue;
@@ -256,27 +283,46 @@ namespace CivilReportApplication.Models
         public List<PointFromCrossSection> PointCodesReport()
         {
             ReadHtml();
-            var allRows = innerHtml.DocumentNode.SelectNodes("//tr").ToList();
+
+            var allRows = innerHtml.DocumentNode
+                                    .SelectNodes("//tr")
+                                    .ToList();
+
             var temp = allRows[0].InnerHtml;
+
             var temp2 = allRows[1].InnerHtml;
+
             var codeRow = new HtmlDocument();
+
             codeRow.LoadHtml(temp);
+
             var offesetRow = new HtmlDocument();
+
             offesetRow.LoadHtml(temp2);
 
-            var allCodes = codeRow.DocumentNode.SelectNodes("//td").Select(x => x.InnerText).ToList();
-            var allOffset = offesetRow.DocumentNode.SelectNodes("//td").Select(x => x.InnerText).ToList();
+            var allCodes = codeRow.DocumentNode
+                                  .SelectNodes("//td")
+                                  .Select(x => x.InnerText)
+                                  .ToList();
+
+            var allOffset = offesetRow.DocumentNode
+                                      .SelectNodes("//td")
+                                      .Select(x => x.InnerText)
+                                      .ToList();
 
             var result = new List<PointFromCrossSection>();
             for (int i = 1; i < allCodes.Count; i++)
             {
-                if (allCodes[i] == "&nbsp;") continue;
+                if (allCodes[i] == "&nbsp;")
+                {
+                    continue;
+                }
+
                 PointFromCrossSection point = new PointFromCrossSection();
                 point.Code = allCodes[i];
 
-                var offset = double.Parse(allOffset[i].Replace("m", ""));
+                var offset = double.Parse(PurgeValue("m", allOffset[i]));
 
-                string side;
 
                 point.SetSide(offset);
 
@@ -285,9 +331,7 @@ namespace CivilReportApplication.Models
             }
 
             return result;
-            // throw new NotImplementedException();
         }
-
 
         private string[] Data(string html)
         {
@@ -302,6 +346,7 @@ namespace CivilReportApplication.Models
             return result;
         }
 
-
+        private string PurgeValue(string purgeChar, string value)
+            => value = value.Replace(purgeChar, "");
     }
 }

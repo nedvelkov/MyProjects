@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.DtoExportModels
+﻿namespace CivilReportApplication.DtoExportModels
 {
    public class AlignmentReportDto
     {
@@ -27,7 +21,5 @@ namespace CivilReportApplication.DtoExportModels
         public PointCoordinate Start { get; set; }
 
         public PointCoordinate End { get; set; }
-
-
     }
 }

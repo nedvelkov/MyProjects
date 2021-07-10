@@ -1,18 +1,13 @@
-﻿using CivilReportApplication.DtoExportModels;
-using CivilReportApplication.DtoImportModels;
-using CivilReportApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Forms;
+
+    using CivilReportApplication.DtoExportModels;
+    using CivilReportApplication.DtoImportModels;
+    using CivilReportApplication.Models;
+
     public partial class ProfleReport : Form
     {
 
@@ -31,7 +26,6 @@ namespace CivilReportApplication
             MainForm form1 = new MainForm();
             form1.ShowDialog();
         }
-
 
         private void ReadBtn_Click(object sender, EventArgs e)
         {
@@ -107,7 +101,6 @@ namespace CivilReportApplication
             for (int i = 0; i < profileReport.Count; i++)
             {
                 var currentRow = profileReport[i];
-                //TODO : Clear 0.00 at radius and curve lenght
                 writer.AddRow(currentRow, 5 + i);
 
                 this.progressBar1.Value = progress + 1 + i;
@@ -130,12 +123,9 @@ namespace CivilReportApplication
             writer.FormatTable(starRow, endRow, startColm, endColm);
             writer.FormatStationColm(starRow, endRow, 2);
 
-
             writer.CreateFile(outputDirectory, "niv", textBox2.Text);
-            ;
 
             DialogResult res = MessageBox.Show("Report created. Do you want to open report", "Sucsseful", MessageBoxButtons.YesNo);
-
 
             if (res == DialogResult.Yes)
             {
@@ -143,8 +133,6 @@ namespace CivilReportApplication
                 System.Diagnostics.Process.Start($"{outputDirectory}\\niv_{textBox2.Text}.xls");
 
             }
-
-            ;
         }
 
         private void Button1_Click(object sender, EventArgs e)

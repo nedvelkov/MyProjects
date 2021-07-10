@@ -1,15 +1,13 @@
 ﻿namespace CivilReportApplication.Models
 {
-
-
     using System;
     using System.Text;
     using System.Runtime.InteropServices;
+    using System.Collections.Generic;
+    using Microsoft.Office.Interop.Excel;
     using Excel = Microsoft.Office.Interop.Excel;
 
     using CivilReportApplication.DtoExportModels;
-    using Microsoft.Office.Interop.Excel;
-    using System.Collections.Generic;
     using CivilReportApplication.DtoImportModels;
 
     public class ExcelWriter
@@ -49,15 +47,14 @@
             var endHeading = $"{((ColmName)endColm).ToString()}2";
             var range = this.xlWorkSheet.Range["A2", endHeading];
             range.Merge();
-            range.HorizontalAlignment = 3;//Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-            range.VerticalAlignment = 3;// Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            range.HorizontalAlignment = 3;
+            range.VerticalAlignment = 3;
             range.Font.Name = "Arial Narrow";
             range.Font.Size = 12;
             range.Font.Bold = true;
             range.Value = heading;
 
         }
-
 
         public void AddColmNames(List<PointFromCrossSection> codes, int row)
         {
@@ -115,7 +112,6 @@
             
         }
 
-
         private void FormatStationCell(int row, int colm)
         {
             var cell = this.xlWorkSheet.Cells[row, colm];
@@ -155,25 +151,14 @@
 
                 if (value == null) value = "";
 
-                //var type = value.GetType().ToString();
-
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
-                    //if (property.Name.Contains("Station"))
-                    //{
-                    //    FormatStationCell(rowNum, colmNum);
-                    //}
-                    //FormatCellTable(rowNum, colmNum);
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
-                    //CreateCellBorder(rowNum, colmNum);
                     continue;
                 }
-              //  FormatCellTable(rowNum, colmNum);
                 xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
-                // CreateCellBorder(rowNum, colmNum);
             }
-
 
         }
         public void AddRow(ProfileReportDto report, int rowNum)
@@ -186,25 +171,17 @@
 
                 if (value == null) value = "";
 
-                //var type = value.GetType().ToString();
-
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
-                    //if (property.Name.Contains("Station"))
-                    //{
-                    //    FormatStationCell(rowNum, colmNum);
-                    //}
-                    //FormatCellTable(rowNum, colmNum);
+
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
-                    //CreateCellBorder(rowNum, colmNum);
+
                     continue;
                 }
-               // FormatCellTable(rowNum, colmNum);
-                xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
-                // CreateCellBorder(rowNum, colmNum);
-            }
 
+                xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
+            }
 
         }
 
@@ -217,26 +194,21 @@
                 var value = property.GetValue(report);
 
                 if (value == null) value = "";
-                ;
-                //var type = value.GetType().ToString();
+
 
                 if (value.GetType().ToString() == "System.Double")
                 {
                     var wrtiteValue = ((double)value).ToString("f2");
-                    //if (property.Name.Contains("Station"))
-                    //{
-                    //    FormatStationCell(rowNum, colmNum);
-                    //}
-                    //FormatCellTable(rowNum, colmNum);
+
                     xlWorkSheet.Cells[rowNum, colmNum] = wrtiteValue;
                     continue;
                 }
-              //  FormatCellTable(rowNum, colmNum);
+
                 xlWorkSheet.Cells[rowNum, colmNum] = value.ToString();
 
             }
 
-            var diff = report.Difference();
+            var diff = report.Difference;
             if (diff != null)
             {
                 var wrtiteValue = ((double)diff).ToString("f0");
@@ -258,7 +230,7 @@
             var file = StaticMethods.ReadTmpFile(fileName);
             int colm = 1;
             xlWorkSheet.Cells[rowNum, colm] = fileName;
-          //  FormatCellTable(rowNum, colm);
+
             colm++;
             ;
 
@@ -267,8 +239,7 @@
                 foreach (var item in lines)
                 {
                     xlWorkSheet.Cells[rowNum, colm] = item;
-                    //FormatCellTable(rowNum, colm);
-                    ;
+                    
                     colm++;
                 }
             }
@@ -286,10 +257,9 @@
             range.VerticalAlignment = 3;
             range.Font.Name = "Arial Narrow";
             range.Font.Size = 10;
-            //  range.Font.Bold = true;
             range.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
             range.Borders.Weight = Excel.XlBorderWeight.xlThin;
-            //range.Borders.
+
             FormatWidthColm(endColm);
         }
 
@@ -324,7 +294,6 @@
             }
         }
 
-
         public void CreateFile(string outputDirectory, string reportType, string reportName)
         {
             FormatWidthColm(10);
@@ -345,7 +314,6 @@
             borderRange[XlBordersIndex.xlEdgeLeft].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
             borderRange[XlBordersIndex.xlEdgeTop].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
             borderRange[XlBordersIndex.xlEdgeBottom].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
-            borderRange[XlBordersIndex.xlEdgeRight].LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
 
         }
 
@@ -356,8 +324,6 @@
             sheetNum++;
         }
 
-
-
         private void Dispose()
         {
             Marshal.ReleaseComObject(xlWorkSheet);
@@ -366,5 +332,4 @@
         }
 
     }
-
 }

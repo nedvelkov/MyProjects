@@ -1,8 +1,6 @@
 ﻿namespace CivilReportApplication
 {
-
     using System;
-    using System.Collections.Generic;
 
     public class DataContainer
     {

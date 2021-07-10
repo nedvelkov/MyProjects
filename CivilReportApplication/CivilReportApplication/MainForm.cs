@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+
+    using System;
+    using System.Windows.Forms;
+
     public partial class MainForm : Form
     {
         public MainForm()
@@ -110,7 +104,7 @@ namespace CivilReportApplication
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            using (CrossSectionReport form=new CrossSectionReport())
+            using (CrossSectionReport form = new CrossSectionReport())
             {
                 form.ShowDialog();
             }

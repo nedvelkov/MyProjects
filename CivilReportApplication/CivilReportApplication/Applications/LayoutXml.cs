@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Reflection;
-using CivilReportApplication.Models;
-
-namespace CivilReportApplication
+﻿namespace CivilReportApplication
 {
+    using System;
+    using System.Data;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Xml.Linq;
+
+    using CivilReportApplication.Models;
     public partial class LayoutXml : Form
     {
         private string filePath;
@@ -49,7 +43,6 @@ namespace CivilReportApplication
                 MessageBox.Show("Invalid directory");
             }
         }
-
 
         private void btn2_Click(object sender, EventArgs e)
         {
@@ -132,7 +125,6 @@ namespace CivilReportApplication
             foreach (var item in profile)
             {
 
-
                 if (item.HasAttributes)
                 {
                     sbCivil.AppendLine($"{item.Value} {item.Attributes().First().Value}");
@@ -141,7 +133,6 @@ namespace CivilReportApplication
                 {
                     sbCivil.AppendLine($"{item.Value}");
                 }
-
 
                 this.progressBar1.Value = progres;
                 progres++;

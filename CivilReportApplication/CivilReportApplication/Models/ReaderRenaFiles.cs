@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.Models
+﻿namespace CivilReportApplication.Models
 {
-   public class ReaderRenaFiles
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+
+    public class ReaderRenaFiles
     {
         public List<string[]> ReadTab8(string filePath)
         {
             List<string[]> result = new List<string[]>();
-            using(var reader=new StreamReader(filePath))
+            using (var reader = new StreamReader(filePath))
             {
-                while (reader.EndOfStream==false)
+                while (reader.EndOfStream == false)
                 {
                     var line = reader.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     result.Add(line);
@@ -22,7 +20,6 @@ namespace CivilReportApplication.Models
             }
 
             return result;
-           // throw new NotImplementedException();
         }
 
         public List<string[]> ReadTab5(string filePath)
@@ -40,21 +37,18 @@ namespace CivilReportApplication.Models
                         continue;
                     }
                     lineNum++;
-                    if (double.TryParse( line[0],out double num)==false) continue;
+                    if (double.TryParse(line[0], out double num) == false) continue;
                     result.Add(line);
                 }
             }
 
             return result;
-
-            throw new NotImplementedException();
-
         }
 
         public List<string> RoadPoint(string filePath)
         {
             List<string> points = new List<string>();
-                        using (var reader = new StreamReader(filePath, Encoding.Default))
+            using (var reader = new StreamReader(filePath, Encoding.Default))
             {
                 int lineNum = 1;
                 while (reader.EndOfStream == false)

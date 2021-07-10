@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.DtoExportModels
+﻿namespace CivilReportApplication.DtoExportModels
 {
     public class SurfaceProfileReportDto
     {
@@ -15,18 +9,18 @@ namespace CivilReportApplication.DtoExportModels
         public double? ElevationProfile { get; set; }
         public string PointName { get; set; }
 
-        public double? Difference()
+        public double? Difference
         {
-            if (IsValid())
+            get
             {
-                return (this.ElevationProfile - this.ElevationSurface)*100;
+                if (IsValid)
+                {
+                    return (this.ElevationProfile - this.ElevationSurface) * 100;
+                }
+                return null;
             }
-            return null;
         }
 
-        private bool IsValid()
-        {
-            return this.ElevationProfile != null && this.ElevationSurface != null;            
-        }
+        private bool IsValid => this.ElevationProfile != null && this.ElevationSurface != null;
     }
 }

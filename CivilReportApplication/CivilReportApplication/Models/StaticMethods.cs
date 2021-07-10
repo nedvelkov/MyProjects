@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CivilReportApplication.Models
+﻿namespace CivilReportApplication.Models
 {
-  public static class StaticMethods
+
+    using System.IO;
+    using System.Text;
+    using System.Collections.Generic;
+
+    public static class StaticMethods
     {
         public static string FileName(string fullName)
         {
@@ -18,12 +16,13 @@ namespace CivilReportApplication.Models
             return name;
         }
 
-        public static void WriteTxtFile(string outputDirectory,string outputName,StringBuilder sb)
+        public static void WriteTxtFile(string outputDirectory, string outputName, StringBuilder sb)
         {
             var direkctoryLayout = $"{outputDirectory}\\{outputName}.txt";
 
             var text = sb.ToString().TrimEnd();
-            using (var stream= new StreamWriter(direkctoryLayout))
+
+            using (var stream = new StreamWriter(direkctoryLayout))
             {
                 stream.Write(text);
             }
@@ -33,6 +32,7 @@ namespace CivilReportApplication.Models
             var direkctoryLayout = $"{outputDirectory}\\{outputName}.scr";
 
             var text = sb.ToString();
+
             using (var stream = new StreamWriter(direkctoryLayout))
             {
                 stream.Write(text);
@@ -48,14 +48,14 @@ namespace CivilReportApplication.Models
             Directory.CreateDirectory(tmpFolder);
         }
 
-        public static void WriteTmpFiles(string text,string fileName)
+        public static void WriteTmpFiles(string text, string fileName)
         {
             var directory = Directory.GetCurrentDirectory();
+
             var disk = Directory.GetDirectoryRoot(directory);
-            ;
             var tmpFolder = Path.Combine(disk, "temp");
             var filePath = Path.Combine(tmpFolder, $"{fileName}.csp");
-            using( var stream=new StreamWriter(filePath))
+            using (var stream = new StreamWriter(filePath))
             {
                 stream.Write(text);
             }
@@ -67,7 +67,7 @@ namespace CivilReportApplication.Models
             var disk = Directory.GetDirectoryRoot(directory);
 
             var tmpFolder = Path.Combine(disk, "temp");
-            Directory.Delete(tmpFolder,true);
+            Directory.Delete(tmpFolder, true);
         }
 
         public static List<string[]> ReadTmpFile(string fileName)
@@ -80,9 +80,9 @@ namespace CivilReportApplication.Models
 
             List<string[]> result = new List<string[]>();
 
-            using (var reader=new StreamReader(filePath))
+            using (var reader = new StreamReader(filePath))
             {
-                while (reader.EndOfStream==false)
+                while (reader.EndOfStream == false)
                 {
                     var line = reader.ReadLine().Split(',');
                     result.Add(line);
